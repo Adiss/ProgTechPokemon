@@ -2,3 +2,4 @@
 target/
 _HELPER/
 Chat.iml
+src/main/resources/database.properties
