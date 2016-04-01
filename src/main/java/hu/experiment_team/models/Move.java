@@ -1,4 +1,4 @@
-package hu.experiment_team;
+package hu.experiment_team.models;
 
 /**
  * This class contains information about the pokemon moves

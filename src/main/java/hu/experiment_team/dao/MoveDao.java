@@ -1,6 +1,8 @@
-package hu.experiment_team;
+package hu.experiment_team.dao;
 
-import hu.experiment_team.interfaces.MoveDaoInterface;
+import hu.experiment_team.dao.interfaces.MoveDaoInterface;
+import hu.experiment_team.models.Move;
+import hu.experiment_team.models.OwnedPokemon;
 
 import java.io.IOException;
 import java.io.InputStream;

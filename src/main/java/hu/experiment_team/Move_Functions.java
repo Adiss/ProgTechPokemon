@@ -1,5 +1,8 @@
 package hu.experiment_team;
 
+import hu.experiment_team.models.Move;
+import hu.experiment_team.models.OwnedPokemon;
+
 import java.util.Random;
 
 /**

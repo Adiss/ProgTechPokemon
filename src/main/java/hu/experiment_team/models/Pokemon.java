@@ -1,4 +1,4 @@
-package hu.experiment_team;
+package hu.experiment_team.models;
 
 import java.util.List;
 import java.util.Random;
@@ -45,14 +45,14 @@ public class Pokemon {
      * */
     public enum Stats {
         GET;
-        int hp;
-        int attack;
-        int defense;
-        int speed;
-        int specialAttack;
-        int specialDefense;
-        int accuracy = 100;
-        int criticalChance = 0;
+        public int hp;
+        public int attack;
+        public int defense;
+        public int speed;
+        public int specialAttack;
+        public int specialDefense;
+        public int accuracy = 100;
+        public int criticalChance = 0;
     }
 
     /**

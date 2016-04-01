@@ -1,4 +1,8 @@
-package hu.experiment_team;
+package hu.experiment_team.models;
+
+import hu.experiment_team.Effectiveness;
+import hu.experiment_team.dao.MoveDao;
+import hu.experiment_team.Move_Functions;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -41,16 +45,16 @@ public class OwnedPokemon extends Pokemon implements Cloneable {
      * */
     public enum battleEffects {
         GET;
-        int sleep = 0;
-        int drowsy = 0;
-        int poison = 0;
-        int badlyPoison = 0;
-        int paralyze = 0;
-        int burn = 0;
-        int flinch = 0;
-        int freeze = 0;
-        int minimized = 0;
-        int confuse = 0;
+        public int sleep = 0;
+        public int drowsy = 0;
+        public int poison = 0;
+        public int badlyPoison = 0;
+        public int paralyze = 0;
+        public int burn = 0;
+        public int flinch = 0;
+        public int freeze = 0;
+        public int minimized = 0;
+        public int confuse = 0;
     }
 
     /**

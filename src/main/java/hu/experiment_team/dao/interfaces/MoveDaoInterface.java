@@ -1,7 +1,7 @@
-package hu.experiment_team.interfaces;
+package hu.experiment_team.dao.interfaces;
 
-import hu.experiment_team.Move;
-import hu.experiment_team.OwnedPokemon;
+import hu.experiment_team.models.Move;
+import hu.experiment_team.models.OwnedPokemon;
 import java.util.List;
 
 /**
