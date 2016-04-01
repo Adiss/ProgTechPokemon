@@ -1,13 +1,12 @@
 package hu.experiment_team;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-/**
- * Created by Jakab on 2016.03.18..
- */
-public class OwnedPokemon extends Pokemon {
+public class OwnedPokemon extends Pokemon implements Cloneable {
 
     /**
      * A pokémon aktuális szintjén összegyűjtött aktuális XP
@@ -33,6 +32,28 @@ public class OwnedPokemon extends Pokemon {
     private Move lastMove;
 
     /**
+     * Egy mentés a pokemon harc előtti állapotáról.
+     * */
+    private OwnedPokemon clonedOne;
+
+    /**
+     * A pokémon harc közbeni effektjeinek egy gyűjtő osztálya.
+     * */
+    public enum battleEffects {
+        GET;
+        int sleep = 0;
+        int drowsy = 0;
+        int poison = 0;
+        int badlyPoison = 0;
+        int paralyze = 0;
+        int burn = 0;
+        int flinch = 0;
+        int freeze = 0;
+        int minimized = 0;
+        int confuse = 0;
+    }
+
+    /**
      * Konstruktor a pokémon osztályhoz.
      *
      * @param id            A pokémon adatbázis beli azonosító száma, típusa <code>int</code>
@@ -56,6 +77,12 @@ public class OwnedPokemon extends Pokemon {
                     .forEach(move -> add(MoveDao.INSTANCE.getMoveById(move)));
         }};
         this.lastMove = null;
+
+        try {
+            clonedOne = (OwnedPokemon) this.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
     }
 
     public int getCurrentXp() {
@@ -78,8 +105,21 @@ public class OwnedPokemon extends Pokemon {
         return Stats.GET;
     }
 
+    public OwnedPokemon getClonedOne() {
+        return clonedOne;
+    }
+
+    public battleEffects getEffects(){
+        return battleEffects.GET;
+    }
+
     public void hurt(OwnedPokemon attacker, Move move){
+
+        // If the move is not a status modifier
         if(!move.getType().equals("Status")){
+
+            // Count damage
+            int damage = 0;
             double STAB = attacker.getType1().equals(move.getType()) || attacker.getType2().equals(move.getType()) ? 1.5 : 1.0;
             double typeEffectiveness = Effectiveness.INSTANCE.get(move.getType(), super.getType1())*10;
             Random r = new Random();
@@ -96,12 +136,36 @@ public class OwnedPokemon extends Pokemon {
             }
             double modifiers = typeEffectiveness * STAB * rand;
 
-            if(r.nextInt(100)+1 > attacker.getStats().criticalChance){
-                Stats.GET.hp -= (int)Math.floor(( userAttack / oppDefense + 2 ) * modifiers);
-                attacker.lastMove = move;
-            } else {
-                Stats.GET.hp -= (int)Math.floor(( userAttack / oppDefense + 2 ) * modifiers) * attacker.getStats().criticalChance;
+            // Count accuracy
+            if((r.nextInt(100) + 1) <= (move.getAccuracy() + attacker.getStats().accuracy)){
+                // Count Crit-chance
+                if(r.nextInt(100)+1 > attacker.getStats().criticalChance){
+                    damage = (int)Math.floor(( userAttack / oppDefense + 2 ) * modifiers);
+                    selectMoveFunction(this, attacker, move, damage);
+                    attacker.lastMove = move;
+                } else {
+                    damage = (int)Math.floor(( userAttack / oppDefense + 2 ) * modifiers) * attacker.getStats().criticalChance;
+                    selectMoveFunction(this, attacker, move, damage);
+                    attacker.lastMove = move;
+                }
             }
+
+        }
+    }
+
+    private void selectMoveFunction(OwnedPokemon d, OwnedPokemon a, Move m, int damage){
+        int countSelected = 0;
+        try {
+            for(Method method : Move_Functions.class.getDeclaredMethods()){
+                if(method.getName().contains(m.getFunctionCode())){
+                    method.invoke(Move_Functions.INSTANCE, this, d, a, damage);
+                    countSelected++;
+                }
+            }
+            if(countSelected == 0)
+                d.getStats().hp -= damage;
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
         }
     }
 
