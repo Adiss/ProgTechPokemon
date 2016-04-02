@@ -72,10 +72,10 @@ public class OwnedPokemon extends Pokemon implements Cloneable {
      * @param spAttack      A pokémon mentális ereje.
      * @param spDefense     A pokémon mentális állóképessége.
      */
-    public OwnedPokemon(int id, String displayName, String type1, String type2, String hiddenAbility, int hp, int attack, int defense, int speed, int spAttack, int spDefense) {
+    public OwnedPokemon(int id, String displayName, String type1, String type2, String hiddenAbility, int hp, int attack, int defense, int speed, int spAttack, int spDefense, int level) {
         super(id, displayName, type1, type2, hiddenAbility, hp, attack, defense, speed, spAttack, spDefense);
         this.currentXp = 0;
-        this.level = 1;
+        this.level = level;
         this.moves = new ArrayList<Move>(){{
             MoveDao.INSTANCE.getKnownMove(1, id).stream()
                     .forEach(move -> add(MoveDao.INSTANCE.getMoveById(move)));

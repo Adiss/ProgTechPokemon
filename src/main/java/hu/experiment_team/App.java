@@ -1,5 +1,8 @@
 package hu.experiment_team;
 
+import hu.experiment_team.dao.PokemonDao;
+import hu.experiment_team.models.OwnedPokemon;
+import hu.experiment_team.models.Pokemon;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

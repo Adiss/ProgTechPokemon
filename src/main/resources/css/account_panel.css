@@ -1,0 +1,38 @@
+.top-hbox {
+    -fx-padding: 10 10 10 10;
+    -fx-background-color: #adff00;
+    -fx-effect: dropshadow(three-pass-box, #000, 10, 0, 0, 0)
+}
+
+.avatar {
+    -fx-border-width: 10px;
+    -fx-border-color: black;
+    -fx-effect: dropshadow(three-pass-box, #000, 5, 0, 0, 0)
+}
+
+.user-information-holder {
+    -fx-alignment: center-left;
+    -fx-padding: 0 10 0 10;
+}
+
+.boldText {
+    -fx-font: 1.1em Tahoma;
+    -fx-font-weight: bold;
+    -fx-indent: 10px;
+}
+
+.userInfosText {
+    -fx-border-insets: 0 0 10 0;
+    -fx-font: 1.5em Tahoma;
+    -fx-fill: white;
+    -fx-font-weight: bold;
+}
+
+.PokemonHolderScrollPane {
+    -fx-pref-width: 570px;
+    -fx-padding: 10 10 10 10;
+}
+
+.PokemonHolderGridPane {
+    -fx-pref-width: 550px;
+}

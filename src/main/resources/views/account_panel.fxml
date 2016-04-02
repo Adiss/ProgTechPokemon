@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+<?import com.cathive.fx.gravatar.GravatarImageView?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.control.ScrollPane?>
+
+<BorderPane stylesheets="@../css/account_panel.css" xmlns:fx="http://javafx.com/fxml">
+    <top>
+        <HBox styleClass="top-hbox">
+            <GravatarImageView fx:id="gravatarImageView" styleClass="avatar"/>
+            <GridPane styleClass="user-information-holder">
+                <ImageView GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2">
+                    <Image url="@/images/user_informations.png"/>
+                </ImageView>
+                <Text styleClass="boldText" GridPane.columnIndex="0" GridPane.rowIndex="1" text="Username: "/>
+                <Text styleClass="boldText" GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="userDisplayName"/>
+                <Text styleClass="boldText" GridPane.columnIndex="0" GridPane.rowIndex="2" text="Win: "/>
+                <Text styleClass="boldText" GridPane.columnIndex="1" GridPane.rowIndex="2" fx:id="userWinCounter"/>
+                <Text styleClass="boldText" GridPane.columnIndex="0" GridPane.rowIndex="3" text="Loose: "/>
+                <Text styleClass="boldText" GridPane.columnIndex="1" GridPane.rowIndex="3" fx:id="userLooseCounter"/>
+            </GridPane>
+        </HBox>
+    </top>
+    <left>
+        <HBox fillHeight="true" prefWidth="590">
+            <ScrollPane styleClass="PokemonHolderScrollPane">
+                <GridPane fx:id="ownedPokemonHolderGridPane" styleClass="PokemonHolderGridPane">
+                </GridPane>
+            </ScrollPane>
+        </HBox>
+    </left>
+</BorderPane>

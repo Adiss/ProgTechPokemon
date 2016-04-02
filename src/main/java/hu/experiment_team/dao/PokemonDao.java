@@ -64,9 +64,9 @@ public enum PokemonDao implements PokemonDaoInterface {
             prepStmt.setInt(1, pokemonId);
             rs = prepStmt.executeQuery();
             while(rs.next()){
-                p = new OwnedPokemon(rs.getInt("ID"), rs.getString("DISPLAYNAME"), rs.getString("TYPE_1"),
-                        rs.getString("TYPE_2"), rs.getString("HIDDENABILITY"), rs.getInt("HP"), rs.getInt("ATTACK"),
-                        rs.getInt("DEFENSE"), rs.getInt("SPEED"), rs.getInt("SPATTACK"), rs.getInt("SPDEFENSE"));
+                p = new OwnedPokemon(rs.getInt("POKEMONID"), rs.getString("DISPLAYNAME"), rs.getString("TYPE1"),
+                        rs.getString("TYPE2"), rs.getString("HIDDENABILITY"), rs.getInt("HP"), rs.getInt("ATTACK"),
+                        rs.getInt("DEFENSE"), rs.getInt("SPEED"), rs.getInt("SPATTACK"), rs.getInt("SPDEFENSE"), rs.getInt("pokemonlevel"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -99,9 +99,9 @@ public enum PokemonDao implements PokemonDaoInterface {
             prepStmt.setInt(1, r.nextInt(649-1) + 1);
             rs = prepStmt.executeQuery();
             while(rs.next()){
-                p = new OwnedPokemon(rs.getInt("ID"), rs.getString("DISPLAYNAME"), rs.getString("TYPE_1"),
-                        rs.getString("TYPE_2"), rs.getString("HIDDENABILITY"), rs.getInt("HP"), rs.getInt("ATTACK"),
-                        rs.getInt("DEFENSE"), rs.getInt("SPEED"), rs.getInt("SPATTACK"), rs.getInt("SPDEFENSE"));
+                p = new OwnedPokemon(rs.getInt("POKEMONID"), rs.getString("DISPLAYNAME"), rs.getString("TYPE1"),
+                        rs.getString("TYPE2"), rs.getString("HIDDENABILITY"), rs.getInt("HP"), rs.getInt("ATTACK"),
+                        rs.getInt("DEFENSE"), rs.getInt("SPEED"), rs.getInt("SPATTACK"), rs.getInt("SPDEFENSE"), rs.getInt("pokemonlevel"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -120,7 +120,7 @@ public enum PokemonDao implements PokemonDaoInterface {
             e.printStackTrace();
         }
 
-        String insertStatement = "INSERT INTO POKEMON_OWNED_POKEMONS (ownerId, pokemonId, displayName, type1, type2, pokemonlevel, hp, attack, defense, speed, spAttack, spDefense, currentXp, hiddenAbility, move1Id, move2Id, move3Id, move4Id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        String insertStatement = "INSERT INTO POKEMON_OWNED_POKEMONS (ownerId, pokemonId, displayName, type1, type2, pokemonlevel, hp, attack, defense, speed, spAttack, spDefense, currentXp, hiddenAbility, move1Id, move2Id, move3Id, move4Id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try{
             List<Integer> moveIds = MoveDao.INSTANCE.getKnownMove(1, p.getId());
             Class.forName(props.getProperty("db.driver"));
@@ -169,9 +169,9 @@ public enum PokemonDao implements PokemonDaoInterface {
             prepStmt.setInt(1, id);
             rs = prepStmt.executeQuery();
             while(rs.next()){
-                owneds.add(new OwnedPokemon(rs.getInt("ID"), rs.getString("DISPLAYNAME"), rs.getString("TYPE_1"),
-                        rs.getString("TYPE_2"), rs.getString("HIDDENABILITY"), rs.getInt("HP"), rs.getInt("ATTACK"),
-                        rs.getInt("DEFENSE"), rs.getInt("SPEED"), rs.getInt("SPATTACK"), rs.getInt("SPDEFENSE")));
+                owneds.add(new OwnedPokemon(rs.getInt("POKEMONID"), rs.getString("DISPLAYNAME"), rs.getString("TYPE1"),
+                        rs.getString("TYPE2"), rs.getString("HIDDENABILITY"), rs.getInt("HP"), rs.getInt("ATTACK"),
+                        rs.getInt("DEFENSE"), rs.getInt("SPEED"), rs.getInt("SPATTACK"), rs.getInt("SPDEFENSE"), rs.getInt("pokemonlevel")));
             }
         } catch (Exception e) {
             e.printStackTrace();

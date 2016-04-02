@@ -12,7 +12,7 @@
 
   <name>PokemonProgram</name>
   <url>http://experiment-team.hu/</url>
-  <inceptionYear>2015</inceptionYear>
+  <inceptionYear>2016</inceptionYear>
   <description>Pokemon program az orara</description>
 
   <developers>
@@ -64,6 +64,11 @@
       <groupId>commons-codec</groupId>
       <artifactId>commons-codec</artifactId>
       <version>1.10</version>
+    </dependency>
+    <dependency>
+      <groupId>com.cathive.fx</groupId>
+      <artifactId>fx-gravatar</artifactId>
+      <version>1.0.0</version>
     </dependency>
   </dependencies>
 

@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+<?import javafx.scene.image.ImageView?>
 
+<?import javafx.scene.image.Image?>
 <GridPane alignment="CENTER" hgap="10" vgap="10" xmlns:fx="http://javafx.com/fxml" fx:controller="hu.experiment_team.controllers.FxmlLoginController">
     <padding><Insets top="10" right="25" bottom="10" left="25"/></padding>
 
-    <Text text="Please log in to continue.." GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2"/>
+    <ImageView GridPane.columnSpan="2">
+        <Image url="/images/pokelogo.png"/>
+    </ImageView>
     <Label text="Username:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
     <TextField fx:id="usernameField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
     <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
     <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
 
     <HBox spacing="10" alignment="BOTTOM_RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="4">
-        <Button text="Sign In" onAction="#handleSigninButtonAction"/>
+        <Button fx:id="submitButton" text="Sign In" onAction="#handleSigninButtonAction"/>
     </HBox>
 
     <Text fx:id="actiontarget" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
