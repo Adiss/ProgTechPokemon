@@ -1,5 +1,5 @@
 .idea
 target/
 _HELPER/
-Chat.iml
+ProgTechPokemon.iml
 src/main/resources/database.properties
