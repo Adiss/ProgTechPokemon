@@ -6,10 +6,12 @@ import hu.experiment_team.models.Trainer;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InterruptedIOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.stream.Collectors;
 
 /**
  * Ez az osztály fogja kezelni a trainerekkel (felhasználókkal) kapcsolatos adatbázis műveleteket.
@@ -92,30 +94,50 @@ public enum TrainerDao implements TrainerDaoInterface {
         }
 
         Trainer t = null;
-        String selectStatement = "SELECT * FROM POKEMON_TRAINERS WHERE username = ?";
+        List<OwnedPokemon> ownedPokemons = new ArrayList<>();
+        List<Integer> partyIDs = null;
+        String selectTrainer = "SELECT * FROM POKEMON_TRAINERS WHERE username = ?";
+        String selectOwnedPokemons = "SELECT * FROM POKEMON_OWNED_POKEMONS WHERE ownerid = ?";
         try{
             Class.forName(props.getProperty("db.driver"));
             conn = DriverManager.getConnection(props.getProperty("db.host"), props.getProperty("db.username"), props.getProperty("db.password"));
-            prepStmt = conn.prepareStatement(selectStatement);
+
+            // Get trainer
+            prepStmt = conn.prepareStatement(selectTrainer);
             prepStmt.setString(1, name);
             rs = prepStmt.executeQuery();
             if(rs.next()){
-                List<OwnedPokemon> partyPokemons = new ArrayList<OwnedPokemon>(){{
-                    add(PokemonDao.INSTANCE.getPokemonById(rs.getInt("PartyPokemon1")));
-                    add(PokemonDao.INSTANCE.getPokemonById(rs.getInt("PartyPokemon2")));
-                    add(PokemonDao.INSTANCE.getPokemonById(rs.getInt("PartyPokemon3")));
-                    add(PokemonDao.INSTANCE.getPokemonById(rs.getInt("PartyPokemon4")));
-                    add(PokemonDao.INSTANCE.getPokemonById(rs.getInt("PartyPokemon5")));
-                    add(PokemonDao.INSTANCE.getPokemonById(rs.getInt("PartyPokemon6")));
+                partyIDs = new ArrayList<Integer>(){{
+                    add(rs.getInt("PartyPokemon1"));
+                    add(rs.getInt("PartyPokemon2"));
+                    add(rs.getInt("PartyPokemon3"));
+                    add(rs.getInt("PartyPokemon4"));
+                    add(rs.getInt("PartyPokemon5"));
+                    add(rs.getInt("PartyPokemon6"));
                 }};
                 t = new Trainer.Builder(rs.getString("username"), rs.getString("displayName"), rs.getString("password"), rs.getString("email"))
-                        .partyPokemons(partyPokemons)
                         .matchWin(rs.getInt("wins"))
                         .matchLoose(rs.getInt("looses"))
                         .register_date(rs.getDate("register_date"))
                         .id(rs.getInt("id"))
-                        .ownedPokemons(PokemonDao.INSTANCE.getOwnedPokemons(rs.getInt("id")))
                         .build();
+            }
+
+            // Get owned Pokemons
+            if(t != null){
+                prepStmt = conn.prepareStatement(selectOwnedPokemons);
+                prepStmt.setInt(1, t.getId());
+                rs = prepStmt.executeQuery();
+                while(rs.next()){
+                    ownedPokemons.add(new OwnedPokemon(rs.getInt("POKEMONID"), rs.getString("DISPLAYNAME"), rs.getString("TYPE1"),
+                            rs.getString("TYPE2"), rs.getString("HIDDENABILITY"), rs.getInt("HP"), rs.getInt("ATTACK"),
+                            rs.getInt("DEFENSE"), rs.getInt("SPEED"), rs.getInt("SPATTACK"), rs.getInt("SPDEFENSE"), rs.getInt("pokemonlevel")));
+                }
+                t.setOwnedPokemons(ownedPokemons);
+
+                // Set PartyPokemons
+                final List<Integer> finalPartyIDs = partyIDs;
+                t.setPartyPokemons(ownedPokemons.stream().filter(p -> finalPartyIDs.contains(p.getId())).collect(Collectors.toList()));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -140,30 +162,50 @@ public enum TrainerDao implements TrainerDaoInterface {
         }
 
         Trainer t = null;
-        String selectStatement = "SELECT * FROM POKEMON_TRAINERS WHERE password = ?";
+        List<OwnedPokemon> ownedPokemons = new ArrayList<>();
+        List<Integer> partyIDs = null;
+        String selectTrainer = "SELECT * FROM POKEMON_TRAINERS WHERE password= ?";
+        String selectOwnedPokemons = "SELECT * FROM POKEMON_OWNED_POKEMONS WHERE ownerid = ?";
         try{
             Class.forName(props.getProperty("db.driver"));
             conn = DriverManager.getConnection(props.getProperty("db.host"), props.getProperty("db.username"), props.getProperty("db.password"));
-            prepStmt = conn.prepareStatement(selectStatement);
+
+            // Get trainer
+            prepStmt = conn.prepareStatement(selectTrainer);
             prepStmt.setString(1, pass);
             rs = prepStmt.executeQuery();
             if(rs.next()){
-                List<OwnedPokemon> partyPokemons = new ArrayList<OwnedPokemon>(){{
-                    this.add(PokemonDao.INSTANCE.getPokemonById(rs.getInt("PartyPokemon1")));
-                    this.add(PokemonDao.INSTANCE.getPokemonById(rs.getInt("PartyPokemon2")));
-                    this.add(PokemonDao.INSTANCE.getPokemonById(rs.getInt("PartyPokemon3")));
-                    this.add(PokemonDao.INSTANCE.getPokemonById(rs.getInt("PartyPokemon4")));
-                    this.add(PokemonDao.INSTANCE.getPokemonById(rs.getInt("PartyPokemon5")));
-                    this.add(PokemonDao.INSTANCE.getPokemonById(rs.getInt("PartyPokemon6")));
+                partyIDs = new ArrayList<Integer>(){{
+                    add(rs.getInt("PartyPokemon1"));
+                    add(rs.getInt("PartyPokemon2"));
+                    add(rs.getInt("PartyPokemon3"));
+                    add(rs.getInt("PartyPokemon4"));
+                    add(rs.getInt("PartyPokemon5"));
+                    add(rs.getInt("PartyPokemon6"));
                 }};
                 t = new Trainer.Builder(rs.getString("username"), rs.getString("displayName"), rs.getString("password"), rs.getString("email"))
-                        .partyPokemons(partyPokemons)
                         .matchWin(rs.getInt("wins"))
                         .matchLoose(rs.getInt("looses"))
                         .register_date(rs.getDate("register_date"))
                         .id(rs.getInt("id"))
-                        .ownedPokemons(PokemonDao.INSTANCE.getOwnedPokemons(rs.getInt("id")))
                         .build();
+            }
+
+            // Get owned Pokemons
+            if(t != null){
+                prepStmt = conn.prepareStatement(selectOwnedPokemons);
+                prepStmt.setInt(1, t.getId());
+                rs = prepStmt.executeQuery();
+                while(rs.next()){
+                    ownedPokemons.add(new OwnedPokemon(rs.getInt("POKEMONID"), rs.getString("DISPLAYNAME"), rs.getString("TYPE1"),
+                            rs.getString("TYPE2"), rs.getString("HIDDENABILITY"), rs.getInt("HP"), rs.getInt("ATTACK"),
+                            rs.getInt("DEFENSE"), rs.getInt("SPEED"), rs.getInt("SPATTACK"), rs.getInt("SPDEFENSE"), rs.getInt("pokemonlevel")));
+                }
+                t.setOwnedPokemons(ownedPokemons);
+
+                // Set PartyPokemons
+                final List<Integer> finalPartyIDs = partyIDs;
+                t.setPartyPokemons(ownedPokemons.stream().filter(p -> finalPartyIDs.contains(p.getId())).collect(Collectors.toList()));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -187,30 +229,50 @@ public enum TrainerDao implements TrainerDaoInterface {
         }
 
         Trainer t = null;
-        String selectStatement = "SELECT * FROM POKEMON_TRAINERS WHERE email = ?";
+        List<OwnedPokemon> ownedPokemons = new ArrayList<>();
+        List<Integer> partyIDs = null;
+        String selectTrainer = "SELECT * FROM POKEMON_TRAINERS WHERE email = ?";
+        String selectOwnedPokemons = "SELECT * FROM POKEMON_OWNED_POKEMONS WHERE ownerid = ?";
         try{
             Class.forName(props.getProperty("db.driver"));
             conn = DriverManager.getConnection(props.getProperty("db.host"), props.getProperty("db.username"), props.getProperty("db.password"));
-            prepStmt = conn.prepareStatement(selectStatement);
+
+            // Get trainer
+            prepStmt = conn.prepareStatement(selectTrainer);
             prepStmt.setString(1, email);
             rs = prepStmt.executeQuery();
             if(rs.next()){
-                List<OwnedPokemon> partyPokemons = new ArrayList<OwnedPokemon>(){{
-                    this.add(PokemonDao.INSTANCE.getPokemonById(rs.getInt("PartyPokemon1")));
-                    this.add(PokemonDao.INSTANCE.getPokemonById(rs.getInt("PartyPokemon2")));
-                    this.add(PokemonDao.INSTANCE.getPokemonById(rs.getInt("PartyPokemon3")));
-                    this.add(PokemonDao.INSTANCE.getPokemonById(rs.getInt("PartyPokemon4")));
-                    this.add(PokemonDao.INSTANCE.getPokemonById(rs.getInt("PartyPokemon5")));
-                    this.add(PokemonDao.INSTANCE.getPokemonById(rs.getInt("PartyPokemon6")));
+                partyIDs = new ArrayList<Integer>(){{
+                    add(rs.getInt("PartyPokemon1"));
+                    add(rs.getInt("PartyPokemon2"));
+                    add(rs.getInt("PartyPokemon3"));
+                    add(rs.getInt("PartyPokemon4"));
+                    add(rs.getInt("PartyPokemon5"));
+                    add(rs.getInt("PartyPokemon6"));
                 }};
                 t = new Trainer.Builder(rs.getString("username"), rs.getString("displayName"), rs.getString("password"), rs.getString("email"))
-                        .partyPokemons(partyPokemons)
                         .matchWin(rs.getInt("wins"))
                         .matchLoose(rs.getInt("looses"))
                         .register_date(rs.getDate("register_date"))
                         .id(rs.getInt("id"))
-                        .ownedPokemons(PokemonDao.INSTANCE.getOwnedPokemons(rs.getInt("id")))
                         .build();
+            }
+
+            // Get owned Pokemons
+            if(t != null){
+                prepStmt = conn.prepareStatement(selectOwnedPokemons);
+                prepStmt.setInt(1, t.getId());
+                rs = prepStmt.executeQuery();
+                while(rs.next()){
+                    ownedPokemons.add(new OwnedPokemon(rs.getInt("POKEMONID"), rs.getString("DISPLAYNAME"), rs.getString("TYPE1"),
+                            rs.getString("TYPE2"), rs.getString("HIDDENABILITY"), rs.getInt("HP"), rs.getInt("ATTACK"),
+                            rs.getInt("DEFENSE"), rs.getInt("SPEED"), rs.getInt("SPATTACK"), rs.getInt("SPDEFENSE"), rs.getInt("pokemonlevel")));
+                }
+                t.setOwnedPokemons(ownedPokemons);
+
+                // Set PartyPokemons
+                final List<Integer> finalPartyIDs = partyIDs;
+                t.setPartyPokemons(ownedPokemons.stream().filter(p -> finalPartyIDs.contains(p.getId())).collect(Collectors.toList()));
             }
         } catch (Exception e) {
             e.printStackTrace();

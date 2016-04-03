@@ -60,6 +60,7 @@ public enum PokemonDao implements PokemonDaoInterface {
         try{
             Class.forName(props.getProperty("db.driver"));
             conn = DriverManager.getConnection(props.getProperty("db.host"), props.getProperty("db.username"), props.getProperty("db.password"));
+
             prepStmt = conn.prepareStatement(selectStatement);
             prepStmt.setInt(1, pokemonId);
             rs = prepStmt.executeQuery();
@@ -68,6 +69,7 @@ public enum PokemonDao implements PokemonDaoInterface {
                         rs.getString("TYPE2"), rs.getString("HIDDENABILITY"), rs.getInt("HP"), rs.getInt("ATTACK"),
                         rs.getInt("DEFENSE"), rs.getInt("SPEED"), rs.getInt("SPATTACK"), rs.getInt("SPDEFENSE"), rs.getInt("pokemonlevel"));
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

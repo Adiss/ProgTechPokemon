@@ -29,10 +29,18 @@
 }
 
 .PokemonHolderScrollPane {
-    -fx-pref-width: 570px;
-    -fx-padding: 10 10 10 10;
+    -fx-padding: 0 20 0 20;
 }
 
-.PokemonHolderGridPane {
-    -fx-pref-width: 550px;
+.PokemonHolderTilePane {
+    -fx-alignment: center;
+    -fx-pref-width: 640px;
+    -fx-padding: 20 20 20 20;
+}
+
+.partyPokemonHolder {
+    -fx-background-color: #adff00;
+    -fx-pref-width: 700px;
+    -fx-pref-tile-width: 100px;
+    -fx-hgap: 20px;
 }

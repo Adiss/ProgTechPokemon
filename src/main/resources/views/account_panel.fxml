@@ -24,12 +24,40 @@
             </GridPane>
         </HBox>
     </top>
-    <left>
-        <HBox fillHeight="true" prefWidth="590">
-            <ScrollPane styleClass="PokemonHolderScrollPane">
-                <GridPane fx:id="ownedPokemonHolderGridPane" styleClass="PokemonHolderGridPane">
+    <center>
+        <ScrollPane styleClass="PokemonHolderScrollPane">
+            <TilePane fx:id="ownedPokemonHolderTilePane" styleClass="PokemonHolderTilePane">
+            </TilePane>
+        </ScrollPane>
+    </center>
+    <bottom>
+        <HBox>
+            <TilePane styleClass="partyPokemonHolder">
+                <GridPane>
+                    <Text text="Pokemon1" fx:id="partyPokemon1Name"/>
+                    <ImageView fx:id="partyPokemon1Image"/>
                 </GridPane>
-            </ScrollPane>
+                <GridPane>
+                    <Text text="Pokemon2" fx:id="partyPokemon2Name"/>
+                    <ImageView fx:id="partyPokemon2Image"/>
+                </GridPane>
+                <GridPane>
+                    <Text text="Pokemon3" fx:id="partyPokemon3Name"/>
+                    <ImageView fx:id="partyPokemon3Image"/>
+                </GridPane>
+                <GridPane>
+                    <Text text="Pokemon4" fx:id="partyPokemon4Name"/>
+                    <ImageView fx:id="partyPokemon4Image"/>
+                </GridPane>
+                <GridPane>
+                    <Text text="Pokemon5" fx:id="partyPokemon5Name"/>
+                    <ImageView fx:id="partyPokemon5Image"/>
+                </GridPane>
+                <GridPane>
+                    <Text text="Pokemon6" fx:id="partyPokemon6Name"/>
+                    <ImageView fx:id="partyPokemon6Image"/>
+                </GridPane>
+            </TilePane>
         </HBox>
-    </left>
+    </bottom>
 </BorderPane>
