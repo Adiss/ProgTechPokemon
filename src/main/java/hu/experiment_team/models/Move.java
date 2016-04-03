@@ -173,4 +173,42 @@ public class Move {
                 ", accuracy: " + accuracy;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Move)) return false;
+
+        Move move = (Move) o;
+
+        if (Id != move.Id) return false;
+        if (baseDamage != move.baseDamage) return false;
+        if (accuracy != move.accuracy) return false;
+        if (totalPP != move.totalPP) return false;
+        if (additionalEffectChance != move.additionalEffectChance) return false;
+        if (priority != move.priority) return false;
+        if (actualPP != move.actualPP) return false;
+        if (displayName != null ? !displayName.equals(move.displayName) : move.displayName != null) return false;
+        if (functionCode != null ? !functionCode.equals(move.functionCode) : move.functionCode != null) return false;
+        if (type != null ? !type.equals(move.type) : move.type != null) return false;
+        if (moveCategory != null ? !moveCategory.equals(move.moveCategory) : move.moveCategory != null) return false;
+        return flags != null ? flags.equals(move.flags) : move.flags == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Id;
+        result = 31 * result + (displayName != null ? displayName.hashCode() : 0);
+        result = 31 * result + (functionCode != null ? functionCode.hashCode() : 0);
+        result = 31 * result + baseDamage;
+        result = 31 * result + (type != null ? type.hashCode() : 0);
+        result = 31 * result + (moveCategory != null ? moveCategory.hashCode() : 0);
+        result = 31 * result + accuracy;
+        result = 31 * result + totalPP;
+        result = 31 * result + additionalEffectChance;
+        result = 31 * result + priority;
+        result = 31 * result + (flags != null ? flags.hashCode() : 0);
+        result = 31 * result + actualPP;
+        return result;
+    }
 }

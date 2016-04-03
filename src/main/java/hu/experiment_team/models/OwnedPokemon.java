@@ -182,4 +182,29 @@ public class OwnedPokemon extends Pokemon implements Cloneable {
                 ", lastMove = " + lastMove +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof OwnedPokemon)) return false;
+
+        OwnedPokemon that = (OwnedPokemon) o;
+
+        if (currentXp != that.currentXp) return false;
+        if (level != that.level) return false;
+        if (moves != null ? !moves.equals(that.moves) : that.moves != null) return false;
+        if (lastMove != null ? !lastMove.equals(that.lastMove) : that.lastMove != null) return false;
+        return clonedOne.equals(that.clonedOne);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = currentXp;
+        result = 31 * result + level;
+        result = 31 * result + (moves != null ? moves.hashCode() : 0);
+        result = 31 * result + (lastMove != null ? lastMove.hashCode() : 0);
+        result = 31 * result + clonedOne.hashCode();
+        return result;
+    }
 }

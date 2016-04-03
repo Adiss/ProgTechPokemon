@@ -127,4 +127,29 @@ public class Pokemon {
                 ", ACCURACY = '" + Stats.GET.accuracy + '\'' +
                 ", CRITICAL_CHANCE = '" + Stats.GET.criticalChance + '\'';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Pokemon)) return false;
+
+        Pokemon pokemon = (Pokemon) o;
+
+        if (id != pokemon.id) return false;
+        if (displayName != null ? !displayName.equals(pokemon.displayName) : pokemon.displayName != null) return false;
+        if (type1 != null ? !type1.equals(pokemon.type1) : pokemon.type1 != null) return false;
+        if (type2 != null ? !type2.equals(pokemon.type2) : pokemon.type2 != null) return false;
+        return hiddenAbility != null ? hiddenAbility.equals(pokemon.hiddenAbility) : pokemon.hiddenAbility == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (displayName != null ? displayName.hashCode() : 0);
+        result = 31 * result + (type1 != null ? type1.hashCode() : 0);
+        result = 31 * result + (type2 != null ? type2.hashCode() : 0);
+        result = 31 * result + (hiddenAbility != null ? hiddenAbility.hashCode() : 0);
+        return result;
+    }
 }

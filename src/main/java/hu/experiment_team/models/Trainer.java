@@ -223,4 +223,58 @@ public class Trainer {
         PokemonDao.INSTANCE.addOwnedPokemon(this.id, p);
     }
 
+
+    @Override
+    public String toString() {
+        return "Trainer{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", displayName='" + displayName + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", register_date=" + register_date +
+                ", ownedPokemons=" + ownedPokemons +
+                ", partyPokemons=" + partyPokemons +
+                ", matchWin=" + matchWin +
+                ", matchLoose=" + matchLoose +
+                ", online=" + online +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Trainer)) return false;
+
+        Trainer trainer = (Trainer) o;
+
+        if (id != trainer.id) return false;
+        if (matchWin != trainer.matchWin) return false;
+        if (matchLoose != trainer.matchLoose) return false;
+        if (online != trainer.online) return false;
+        if (username != null ? !username.equals(trainer.username) : trainer.username != null) return false;
+        if (displayName != null ? !displayName.equals(trainer.displayName) : trainer.displayName != null) return false;
+        if (password != null ? !password.equals(trainer.password) : trainer.password != null) return false;
+        if (email != null ? !email.equals(trainer.email) : trainer.email != null) return false;
+        if (register_date != null ? !register_date.equals(trainer.register_date) : trainer.register_date != null) return false;
+        if (ownedPokemons != null ? !ownedPokemons.equals(trainer.ownedPokemons) : trainer.ownedPokemons != null) return false;
+        return partyPokemons != null ? partyPokemons.equals(trainer.partyPokemons) : trainer.partyPokemons == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (username != null ? username.hashCode() : 0);
+        result = 31 * result + (displayName != null ? displayName.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (register_date != null ? register_date.hashCode() : 0);
+        result = 31 * result + (ownedPokemons != null ? ownedPokemons.hashCode() : 0);
+        result = 31 * result + (partyPokemons != null ? partyPokemons.hashCode() : 0);
+        result = 31 * result + matchWin;
+        result = 31 * result + matchLoose;
+        result = 31 * result + online;
+        return result;
+    }
 }
