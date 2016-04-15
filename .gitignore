@@ -2,4 +2,5 @@
 target/
 _HELPER/
 ProgTechPokemon.iml
+/.gitignore
 src/main/resources/database.properties
