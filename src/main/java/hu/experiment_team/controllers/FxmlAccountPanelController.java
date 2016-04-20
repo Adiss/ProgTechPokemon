@@ -4,11 +4,11 @@ import com.cathive.fx.gravatar.FileTypeExtension;
 import com.cathive.fx.gravatar.GravatarImageView;
 import hu.experiment_team.PokemonUtils;
 import hu.experiment_team.models.Trainer;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.text.Text;
@@ -33,6 +33,8 @@ public class FxmlAccountPanelController implements Initializable {
     @FXML
     public TilePane ownedPokemonHolderTilePane;
 
+    @FXML
+    public BorderPane partyPokemon1Holder;
     @FXML
     public Text partyPokemon1Name;
     @FXML
@@ -82,6 +84,17 @@ public class FxmlAccountPanelController implements Initializable {
         ownedPokemonHolderTilePane.setHgap(15);
         ownedPokemonHolderTilePane.setPrefTileWidth(90);
         ownedPokemonHolderTilePane.setPrefTileHeight(90);
+
+        // Initialize partyPokemonHolders:
+        partyPokemon1Holder.setPrefHeight(100);
+
+        partyPokemon1Image.setImage(new Image("/images/battlers/question_mark.png"));
+        partyPokemon2Image.setImage(new Image("/images/battlers/question_mark.png"));
+        partyPokemon3Image.setImage(new Image("/images/battlers/question_mark.png"));
+        partyPokemon4Image.setImage(new Image("/images/battlers/question_mark.png"));
+        partyPokemon5Image.setImage(new Image("/images/battlers/question_mark.png"));
+        partyPokemon6Image.setImage(new Image("/images/battlers/question_mark.png"));
+
         // Initialize Owned Pokemons
         for(int i = 0; i < user.getOwnedPokemons().size(); i++){
             // Grid, that holds the pokemon and his name
@@ -95,8 +108,11 @@ public class FxmlAccountPanelController implements Initializable {
             //
             final int finalI = i;
             pokeHolder.setOnMouseClicked(event -> {
+                partyPokemon1Image.setImage(PokemonUtils.INSTANCE.getPokemonImage(user.getOwnedPokemons().get(finalI).getId()));
+                partyPokemon1Image.setPreserveRatio(true);
+                partyPokemon1Image.setFitHeight(80);
                 partyPokemon1Name.setText(user.getOwnedPokemons().get(finalI).getDisplayName());
-                partyPokemon1Image = PokemonUtils.INSTANCE.getPokemonImageView(user.getOwnedPokemons().get(finalI).getId());
+                partyPokemon1Name.setTextAlignment(TextAlignment.CENTER);
             });
             // Display grid
             ownedPokemonHolderTilePane.getChildren().add(pokeHolder);

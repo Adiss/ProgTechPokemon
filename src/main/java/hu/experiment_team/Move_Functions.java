@@ -223,6 +223,9 @@ public enum Move_Functions {
      * Accuracy 50% in sunshine.
      * */
     public void Move_Function_015(OwnedPokemon d, OwnedPokemon a, int damage){
+        // TODO -> Nincs idojaras.
+        d.getStats().hp -= damage;
+        d.getEffects().confuse = (r.nextInt(5)+1);
     }
 
     /**
@@ -230,6 +233,8 @@ public enum Move_Functions {
      * Attracts the target.
      * */
     public void Move_Function_016(OwnedPokemon d, OwnedPokemon a, int damage){
+        d.getStats().hp -= damage;
+        d.getEffects().attract = 1;
     }
 
     /**
@@ -237,6 +242,10 @@ public enum Move_Functions {
      * Burns, freezes or paralyzes the target.
      * */
     public void Move_Function_017(OwnedPokemon d, OwnedPokemon a, int damage){
+        d.getStats().hp -= damage;
+        d.getEffects().burn = 1;
+        d.getEffects().freeze = (r.nextInt(5)+1);
+        d.getEffects().paralyze = (r.nextInt(5)+1);
     }
 
     /**
@@ -244,6 +253,10 @@ public enum Move_Functions {
      * Cures user of burn, poison and paralysis.
      * */
     public void Move_Function_018(OwnedPokemon d, OwnedPokemon a, int damage){
+        a.getEffects().burn = 0;
+        a.getEffects().poison = 0;
+        a.getEffects().badlyPoison = 0;
+        a.getEffects().paralyze = 0;
     }
 
     /**
@@ -251,6 +264,7 @@ public enum Move_Functions {
      * Cures all party Pokémon of permanent status problems.
      * */
     public void Move_Function_019(OwnedPokemon d, OwnedPokemon a, int damage){
+        // TODO -> All party pokemon? talan majd ki lehet venni a battleScene-bol.
     }
 
     /**
@@ -258,6 +272,193 @@ public enum Move_Functions {
      * User passes its status problem to the target.
      * */
     public void Move_Function_01B(OwnedPokemon d, OwnedPokemon a, int damage){
+        d.getEffects().sleep = 0;
+        d.getEffects().poison = 0;
+        d.getEffects().badlyPoison = 0;
+        d.getEffects().paralyze = 0;
+        d.getEffects().burn = 0;
+        d.getEffects().freeze = 0;
+        d.getEffects().confuse = 0;
+        d.getEffects().attract = 0;
+
+        a.getEffects().sleep = 0;
+        a.getEffects().poison = 0;
+        a.getEffects().badlyPoison = 0;
+        a.getEffects().paralyze = 0;
+        a.getEffects().burn = 0;
+        a.getEffects().freeze = 0;
+        a.getEffects().confuse = 0;
+        a.getEffects().attract = 0;
     }
-    
+
+    /**
+     * Function code: 01C.
+     * Increases the user's Attack by 1 stage.
+     * One stage increase means attack*1.5
+     * */
+    public void Move_Function_01C(OwnedPokemon d, OwnedPokemon a, int damage){
+        d.getStats().hp -= damage;
+        a.getStats().attack *= 1.5;
+    }
+
+    /**
+     * Function code: 01D.
+     * Increases the user's Defense by 1 stage.
+     * */
+    public void Move_Function_01D(OwnedPokemon d, OwnedPokemon a, int damage){
+        d.getStats().hp -= damage;
+        a.getStats().defense *= 1.5;
+    }
+
+    /**
+     * Function code: 01E.
+     * Increases the user's Defense by 1 stage.
+     * User curls up (making the user's Ice Ball/Rollout do double damage), even if Defense is not boosted. Curling up is not cumulative.
+     * */
+    public void Move_Function_01E(OwnedPokemon d, OwnedPokemon a, int damage){
+        // TODO -> Nincs curl..
+        a.getStats().defense *= 1.5;
+    }
+
+    /**
+     * Function code: 01F.
+     * Increases the user's Speed by 1 stage.
+     * */
+    public void Move_Function_01F(OwnedPokemon d, OwnedPokemon a, int damage){
+        d.getStats().hp -= damage;
+        a.getStats().speed *= 1.5;
+    }
+
+    /**
+     * Function code: 020.
+     * Increases the user's Special Attack by 1 stage.
+     * */
+    public void Move_Function_020(OwnedPokemon d, OwnedPokemon a, int damage){
+        d.getStats().hp -= damage;
+        a.getStats().specialAttack*= 1.5;
+    }
+
+    /**
+     * Function code: 021.
+     * Increases the user's Special Defense by 1 stage.
+     * Charges up Electric attacks, until the end of the next round, the power of the user's damaging Electric attacks is doubled.
+     * The effect ends if the user is switched out.
+     * */
+    public void Move_Function_021(OwnedPokemon d, OwnedPokemon a, int damage){
+        // TODO -> Nincs chargeUp..
+        a.getStats().specialDefense*= 1.5;
+    }
+
+    /**
+     * Function code: 022.
+     * Increases the user's evasion by 1 stage.
+     * */
+    public void Move_Function_022(OwnedPokemon d, OwnedPokemon a, int damage){
+        a.getEffects().evasion += 1;
+    }
+
+    /**
+     * Function code: 023.
+     * Increases the user's critical hit rate by 2 stages.
+     * One stage = 10.
+     * Stage is in percent.
+     * */
+    public void Move_Function_023(OwnedPokemon d, OwnedPokemon a, int damage){
+        d.getStats().criticalChance += 20;
+    }
+
+    /**
+     * Function code: 024.
+     * Increases the user's Attack and Defense by 1 stage each.
+     * */
+    public void Move_Function_024(OwnedPokemon d, OwnedPokemon a, int damage){
+        a.getStats().attack *= 1.5;
+        a.getStats().defense *= 1.5;
+    }
+
+    /**
+     * Function code: 025.
+     * Increases the user's Attack, Defense and accuracy by 1 stage each.
+     * Accuracy is in percent.
+     * */
+    public void Move_Function_025(OwnedPokemon d, OwnedPokemon a, int damage){
+        a.getStats().attack *= 1.5;
+        a.getStats().defense *= 1.5;
+        a.getStats().accuracy += 10;
+    }
+
+    /**
+     * Function code: 026.
+     * Increases the user's Attack and Speed by 1 stage each.
+     * */
+    public void Move_Function_026(OwnedPokemon d, OwnedPokemon a, int damage){
+        a.getStats().attack *= 1.5;
+        a.getStats().speed *= 1.5;
+    }
+
+    /**
+     * Function code: 027.
+     * Increases the user's Attack and Special Attack by 1 stage each.
+     * */
+    public void Move_Function_027(OwnedPokemon d, OwnedPokemon a, int damage){
+        a.getStats().attack *= 1.5;
+        a.getStats().specialAttack *= 1.5;
+    }
+
+    /**
+     * Function code: 028.
+     * Increases the user's Attack and Special Attack by 1 stage each (2 each in sunshine).
+     * */
+    public void Move_Function_028(OwnedPokemon d, OwnedPokemon a, int damage){
+    }
+
+    /**
+     * Function code: 029.
+     * Increases the user's Attack and accuracy by 1 stage each.
+     * */
+    public void Move_Function_029(OwnedPokemon d, OwnedPokemon a, int damage){
+    }
+
+    /**
+     * Function code: 02A.
+     * Increases the user's Defense and Special Defense by 1 stage each.
+     * */
+    public void Move_Function_02A(OwnedPokemon d, OwnedPokemon a, int damage){
+    }
+
+    /**
+     * Function code: 02B.
+     * Increases the user's Speed, Special Attack and Special Defense by 1 stage each.
+     * */
+    public void Move_Function_02B(OwnedPokemon d, OwnedPokemon a, int damage){
+    }
+
+    /**
+     * Function code: 02C.
+     * Increases the user's Special Attack and Special Defense by 1 stage each.
+     * */
+    public void Move_Function_02C(OwnedPokemon d, OwnedPokemon a, int damage){
+    }
+
+    /**
+     * Function code: 02D.
+     * Increases the user's Attack, Defense, Speed, Special Attack and Special Defense by 1 stage each.
+     * */
+    public void Move_Function_02D(OwnedPokemon d, OwnedPokemon a, int damage){
+    }
+
+    /**
+     * Function code: 02E.
+     * Increases the user's Attack by 2 stages.
+     * */
+    public void Move_Function_02E(OwnedPokemon d, OwnedPokemon a, int damage){
+    }
+
+    /**
+     * Function code: 02F.
+     * Increases the user's Defense by 2 stages.
+     * */
+    public void Move_Function_02F(OwnedPokemon d, OwnedPokemon a, int damage){
+    }
+
 }

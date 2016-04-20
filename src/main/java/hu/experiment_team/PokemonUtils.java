@@ -1,5 +1,6 @@
 package hu.experiment_team;
 
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 /**
@@ -21,6 +22,20 @@ public enum PokemonUtils {
 
         pokemonImage.setPreserveRatio(true);
         pokemonImage.setFitHeight(80);
+
+        return pokemonImage;
+    }
+
+    public Image getPokemonImage(int id){
+
+        Image pokemonImage;
+
+        if(id < 10)
+            pokemonImage = new Image("/images/battlers/00" + String.valueOf(id) + ".gif");
+        else if (id < 100)
+            pokemonImage = new Image("/images/battlers/0" + String.valueOf(id) + ".gif");
+        else
+            pokemonImage = new Image("/images/battlers/" + String.valueOf(id) + ".gif");
 
         return pokemonImage;
     }

@@ -42,5 +42,7 @@
     -fx-background-color: #adff00;
     -fx-pref-width: 700px;
     -fx-pref-tile-width: 100px;
-    -fx-hgap: 20px;
+    -fx-hgap: 8px;
+    -fx-padding: 5 30 5 30;
+    -fx-tile-alignment: bottom-center;
 }

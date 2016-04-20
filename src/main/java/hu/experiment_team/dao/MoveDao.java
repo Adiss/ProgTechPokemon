@@ -99,7 +99,7 @@ public enum MoveDao implements MoveDaoInterface {
         }
 
         List<Integer> moveIds = new ArrayList<>();
-        String selectStatement = "SELECT moveId FROM POKEMON_MOVES_BY_LEVEL WHERE plevel <= ? AND pokemonId = ? AND ROWNUM < 5 ORDER BY plevel DESC";
+        String selectStatement = "SELECT moveId FROM POKEMON_MOVES_BY_LEVEL WHERE plevel <= ? AND pokemonId = ? ORDER BY plevel DESC LIMIT 4";
         try{
             Class.forName(props.getProperty("db.driver"));
             conn = DriverManager.getConnection(props.getProperty("db.host"), props.getProperty("db.username"), props.getProperty("db.password"));

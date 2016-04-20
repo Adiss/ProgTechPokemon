@@ -33,6 +33,7 @@ public class App extends Application
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Pokemon App");
+        primaryStage.setResizable(false);
         Parent root = FXMLLoader.load(getClass().getResource("/views/login.fxml"));
 
         Scene loginScene = new Scene(root, 400, 300);

@@ -55,6 +55,8 @@ public class OwnedPokemon extends Pokemon implements Cloneable {
         public int freeze = 0;
         public int minimized = 0;
         public int confuse = 0;
+        public int attract = 0;
+        public int evasion = 0;
     }
 
     /**
