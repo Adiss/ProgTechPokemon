@@ -199,6 +199,12 @@ public class Trainer {
      * */
     public void setPartyPokemons(List<OwnedPokemon> partyPokemons) { this.partyPokemons = partyPokemons; }
     /**
+     *@param p Pokemon
+     * */
+    public void addPartyPokemon(OwnedPokemon p) {
+        this.partyPokemons.add(p);
+    }
+    /**
      * @param matchWin Amount of wins
      * */
     public void setMatchWin(int matchWin) { this.matchWin = matchWin; }

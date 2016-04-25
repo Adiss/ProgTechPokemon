@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.GridPane?>
+
+<BorderPane stylesheets="@../css/battle_scene.css" xmlns:fx="http://javafx.com/fxml">
+    <top>
+        <AnchorPane fx:id="top_battle_scene_holder" styleClass="top-battle-scene-holder">
+
+        </AnchorPane>
+    </top>
+    <bottom>
+        <GridPane styleClass="bottom-move-holder">
+
+        </GridPane>
+    </bottom>
+</BorderPane>
