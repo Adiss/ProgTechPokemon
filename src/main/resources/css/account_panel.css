@@ -1,18 +1,18 @@
-.top-hbox {
+.top-borderpane {
     -fx-padding: 10 10 10 10;
     -fx-background-color: #adff00;
-    -fx-effect: dropshadow(three-pass-box, #000, 10, 0, 0, 0)
+    -fx-effect: dropshadow(three-pass-box, #000, 10, 0, 0, 0);
 }
 
 .avatar {
     -fx-border-width: 10px;
     -fx-border-color: black;
-    -fx-effect: dropshadow(three-pass-box, #000, 5, 0, 0, 0)
+
 }
 
 .user-information-holder {
     -fx-alignment: center-left;
-    -fx-padding: 0 10 0 10;
+    -fx-hgap: 10;
 }
 
 .boldText {
