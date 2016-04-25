@@ -4,8 +4,15 @@ import com.cathive.fx.gravatar.FileTypeExtension;
 import com.cathive.fx.gravatar.GravatarImageView;
 import hu.experiment_team.PokemonUtils;
 import hu.experiment_team.models.Trainer;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
@@ -17,7 +24,9 @@ import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -63,11 +72,21 @@ public class FxmlAccountPanelController implements Initializable {
     public Text partyPokemon6Name;
     @FXML
     public ImageView partyPokemon6Image;
+    @FXML
+    public Button startButton;
 
     public Trainer user;
+    private IntegerProperty partyPokemonCounter;
+    final ChangeListener changeListener = (observableValue, oldValue, newValue) -> {
+        if((int)newValue >= 6){
+            startButton.setDisable(false);
+        }
+    };
 
     public FxmlAccountPanelController(Trainer user){
         this.user = user;
+        this.partyPokemonCounter = new SimpleIntegerProperty(0);
+        this.partyPokemonCounter.addListener(changeListener);
     }
 
     @Override
@@ -83,6 +102,27 @@ public class FxmlAccountPanelController implements Initializable {
         userDisplayName.setText(user.getDisplayName());
         userWinCounter.setText(String.valueOf(user.getMatchWin()));
         userLooseCounter.setText(String.valueOf(user.getMatchLoose()));
+
+        //Initialize start button
+        startButton.setDisable(true);
+        startButton.setOnAction(event -> {
+            Stage stage;
+            Parent root;
+
+            stage = (Stage)startButton.getScene().getWindow();
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/battle_scene.fxml"));
+                FxmlBattleSceneController controller = new FxmlBattleSceneController(user);
+                loader.setController(controller);
+                root = loader.load();
+                Scene scene = new Scene(root, 700, 500);
+                stage.setScene(scene);
+                stage.show();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
 
         ownedPokemonHolderTilePane.setVgap(15);
         ownedPokemonHolderTilePane.setHgap(15);
@@ -134,6 +174,8 @@ public class FxmlAccountPanelController implements Initializable {
                 partyPokemon1Image.setPreserveRatio(true);
                 partyPokemon1Image.setFitHeight(80);
                 success = true;
+                partyPokemonCounter.set(partyPokemonCounter.getValue()+1);
+                user.addPartyPokemon(user.getOwnedPokemons().get(Integer.parseInt(db.getString())));
             }
             event.setDropCompleted(success);
             event.consume();
@@ -181,6 +223,8 @@ public class FxmlAccountPanelController implements Initializable {
                 partyPokemon2Image.setPreserveRatio(true);
                 partyPokemon2Image.setFitHeight(80);
                 success = true;
+                partyPokemonCounter.set(partyPokemonCounter.getValue()+1);
+                user.addPartyPokemon(user.getOwnedPokemons().get(Integer.parseInt(db.getString())));
             }
             event.setDropCompleted(success);
             event.consume();
@@ -228,6 +272,8 @@ public class FxmlAccountPanelController implements Initializable {
                 partyPokemon3Image.setPreserveRatio(true);
                 partyPokemon3Image.setFitHeight(80);
                 success = true;
+                partyPokemonCounter.set(partyPokemonCounter.getValue()+1);
+                user.addPartyPokemon(user.getOwnedPokemons().get(Integer.parseInt(db.getString())));
             }
             event.setDropCompleted(success);
             event.consume();
@@ -275,6 +321,8 @@ public class FxmlAccountPanelController implements Initializable {
                 partyPokemon4Image.setPreserveRatio(true);
                 partyPokemon4Image.setFitHeight(80);
                 success = true;
+                partyPokemonCounter.set(partyPokemonCounter.getValue()+1);
+                user.addPartyPokemon(user.getOwnedPokemons().get(Integer.parseInt(db.getString())));
             }
             event.setDropCompleted(success);
             event.consume();
@@ -322,6 +370,8 @@ public class FxmlAccountPanelController implements Initializable {
                 partyPokemon5Image.setPreserveRatio(true);
                 partyPokemon5Image.setFitHeight(80);
                 success = true;
+                partyPokemonCounter.set(partyPokemonCounter.getValue()+1);
+                user.addPartyPokemon(user.getOwnedPokemons().get(Integer.parseInt(db.getString())));
             }
             event.setDropCompleted(success);
             event.consume();
@@ -369,6 +419,8 @@ public class FxmlAccountPanelController implements Initializable {
                 partyPokemon6Image.setPreserveRatio(true);
                 partyPokemon6Image.setFitHeight(80);
                 success = true;
+                partyPokemonCounter.set(partyPokemonCounter.getValue()+1);
+                user.addPartyPokemon(user.getOwnedPokemons().get(Integer.parseInt(db.getString())));
             }
             event.setDropCompleted(success);
             event.consume();
@@ -388,10 +440,12 @@ public class FxmlAccountPanelController implements Initializable {
             pokeHolder.add(pokeName, 0, 1);
 
             // PP DnD Event detected
+            final int finalI = i;
             pokeHolder.setOnDragDetected(event -> {
                 Dragboard db = pokImage.startDragAndDrop(TransferMode.MOVE);
                 ClipboardContent content = new ClipboardContent();
                 content.putImage(pokImage.getImage());
+                content.putString(String.valueOf(finalI));
                 db.setContent(content);
                 event.consume();
             });
