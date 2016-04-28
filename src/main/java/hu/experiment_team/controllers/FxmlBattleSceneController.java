@@ -79,6 +79,18 @@ public class FxmlBattleSceneController implements Initializable {
         AnchorPane.setRightAnchor(opponentPokemonImage, 60.0);
         AnchorPane.setTopAnchor(opponentPokemonImage, 150.0);
 
+        AnchorPane.setTopAnchor(OpponentPokemonStatusPanel, 50.0);
+        AnchorPane.setLeftAnchor(OpponentPokemonStatusPanel, 50.0);
+
+        AnchorPane.setBottomAnchor(MyPokemonStatusPanel, 40.0);
+        AnchorPane.setRightAnchor(MyPokemonStatusPanel, 40.0);
+
+        MyPokemonName.setText(trainer.getPartyPokemons().get(0).getDisplayName());
+        MyPokemonHpText.setText(String.valueOf(trainer.getPartyPokemons().get(0).getStats().hp));
+
+        OpponentPokemonName.setText(opponent.getDisplayName());
+        OpponentPokemonHpText.setText(String.valueOf(opponent.getStats().hp));
+
     }
 
 }

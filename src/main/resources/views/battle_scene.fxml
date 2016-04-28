@@ -15,8 +15,8 @@
                 <ProgressBar fx:id="OpponentPokemonHpProgressBar" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="5"/>
                 <Text fx:id="OpponentPokemonHpText" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
             </GridPane>
-            <GridPane fx:id="MyPokemonStatusPanel" GridPane.columnIndex="0" GridPane.rowIndex="0">
-                <Text fx:id="MyPokemonName"/>
+            <GridPane fx:id="MyPokemonStatusPanel">
+                <Text fx:id="MyPokemonName" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
                 <ProgressBar fx:id="MyPokemonHpProgressBar" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="5"/>
                 <Text fx:id="MyPokemonHpText" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
             </GridPane>
