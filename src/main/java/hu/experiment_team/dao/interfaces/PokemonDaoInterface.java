@@ -20,7 +20,7 @@ public interface PokemonDaoInterface {
      * Kiválaszt egy random alap pokémont az adatbázisból.
      * @return Egy pokémon objektuma
      * */
-    OwnedPokemon getRandomPokemon();
+    OwnedPokemon getRandomPokemon(int level);
 
     /**
      * Hozzáad egy pokémont az egyik játékos gyűjteményéhez.

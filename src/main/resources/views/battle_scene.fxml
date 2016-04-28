@@ -4,10 +4,24 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.GridPane?>
 
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.text.Text?>
 <BorderPane stylesheets="@../css/battle_scene.css" xmlns:fx="http://javafx.com/fxml">
     <top>
         <AnchorPane fx:id="top_battle_scene_holder" styleClass="top-battle-scene-holder">
-
+            <GridPane fx:id="OpponentPokemonStatusPanel">
+                <Text fx:id="OpponentPokemonName" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                <ProgressBar fx:id="OpponentPokemonHpProgressBar" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="5"/>
+                <Text fx:id="OpponentPokemonHpText" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+            </GridPane>
+            <GridPane fx:id="MyPokemonStatusPanel" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                <Text fx:id="MyPokemonName"/>
+                <ProgressBar fx:id="MyPokemonHpProgressBar" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="5"/>
+                <Text fx:id="MyPokemonHpText" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+            </GridPane>
+            <ImageView fx:id="myPokemonImage"/>
+            <ImageView fx:id="opponentPokemonImage" styleClass="opponent-pokemon-image"/>
         </AnchorPane>
     </top>
     <bottom>

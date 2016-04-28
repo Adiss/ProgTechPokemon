@@ -81,9 +81,10 @@ public enum PokemonDao implements PokemonDaoInterface {
 
     /**
      * Kiválaszt egy random alap pokémont az adatbázisból.
+     * TODO -> NEM IGEN VANNAK SPELLJEI? SEM ITT SEM A GETOWNEDBEN? ELLENŐRIZNI KELL!
      * */
     @Override
-    public OwnedPokemon getRandomPokemon(){
+    public OwnedPokemon getRandomPokemon(int level){
 
         try {
             props.load(propFile);
@@ -91,6 +92,7 @@ public enum PokemonDao implements PokemonDaoInterface {
             e.printStackTrace();
         }
 
+        List<Integer> moveIds = null;
         Random r = new Random();
         OwnedPokemon p = null;
         String selectStatement = "SELECT * FROM POKEMON_POKEMONS WHERE id = ?";
@@ -101,9 +103,10 @@ public enum PokemonDao implements PokemonDaoInterface {
             prepStmt.setInt(1, r.nextInt(649-1) + 1);
             rs = prepStmt.executeQuery();
             while(rs.next()){
-                p = new OwnedPokemon(rs.getInt("POKEMONID"), rs.getString("DISPLAYNAME"), rs.getString("TYPE1"),
+                moveIds = MoveDao.INSTANCE.getKnownMove(level, rs.getInt("ID"));
+                p = new OwnedPokemon(rs.getInt("ID"), rs.getString("DISPLAYNAME"), rs.getString("TYPE1"),
                         rs.getString("TYPE2"), rs.getString("HIDDENABILITY"), rs.getInt("HP"), rs.getInt("ATTACK"),
-                        rs.getInt("DEFENSE"), rs.getInt("SPEED"), rs.getInt("SPATTACK"), rs.getInt("SPDEFENSE"), rs.getInt("pokemonlevel"));
+                        rs.getInt("DEFENSE"), rs.getInt("SPEED"), rs.getInt("SPATTACK"), rs.getInt("SPDEFENSE"), level);
             }
         } catch (Exception e) {
             e.printStackTrace();

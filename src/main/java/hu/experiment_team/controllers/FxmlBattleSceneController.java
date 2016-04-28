@@ -1,12 +1,17 @@
 package hu.experiment_team.controllers;
 
-import com.sun.javafx.css.Size;
+import hu.experiment_team.PokemonUtils;
+import hu.experiment_team.dao.PokemonDao;
 import hu.experiment_team.models.OwnedPokemon;
+import hu.experiment_team.models.Pokemon;
 import hu.experiment_team.models.Trainer;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.util.Random;
@@ -19,14 +24,37 @@ public class FxmlBattleSceneController implements Initializable {
 
     @FXML
     public AnchorPane top_battle_scene_holder;
+    @FXML
+    public GridPane OpponentPokemonStatusPanel;
+    @FXML
+    public Text OpponentPokemonName;
+    @FXML
+    public ProgressBar OpponentPokemonHpProgressBar;
+    @FXML
+    public Text OpponentPokemonHpText;
+    @FXML
+    public GridPane MyPokemonStatusPanel;
+    @FXML
+    public Text MyPokemonName;
+    @FXML
+    public ProgressBar MyPokemonHpProgressBar;
+    @FXML
+    public Text MyPokemonHpText;
+    @FXML
+    public ImageView myPokemonImage;
+    @FXML
+    public ImageView opponentPokemonImage;
+
 
     private Trainer trainer;
+    private OwnedPokemon opponent;
     private Random r;
 
     private int rand;
 
     public FxmlBattleSceneController(Trainer t) {
         this.trainer = t;
+        this.opponent = PokemonDao.INSTANCE.getRandomPokemon(t.getPartyPokemons().get(0).getLevel());
         this.r = new Random();
     }
 
@@ -42,6 +70,14 @@ public class FxmlBattleSceneController implements Initializable {
                         )
                 )
         );
+
+        myPokemonImage.setImage(PokemonUtils.INSTANCE.getPokemonBackImage(trainer.getPartyPokemons().get(0).getId()));
+        AnchorPane.setLeftAnchor(myPokemonImage, 0.0);
+        AnchorPane.setBottomAnchor(myPokemonImage, 0.0);
+
+        opponentPokemonImage.setImage(PokemonUtils.INSTANCE.getPokemonImage(opponent.getId()));
+        AnchorPane.setRightAnchor(opponentPokemonImage, 60.0);
+        AnchorPane.setTopAnchor(opponentPokemonImage, 150.0);
 
     }
 

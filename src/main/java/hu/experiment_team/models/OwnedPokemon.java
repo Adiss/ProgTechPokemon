@@ -119,6 +119,8 @@ public class OwnedPokemon extends Pokemon implements Cloneable {
         return battleEffects.GET;
     }
 
+
+
     public void hurt(OwnedPokemon attacker, Move move){
 
         // If the move is not a status modifier

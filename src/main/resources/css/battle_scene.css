@@ -1,3 +1,8 @@
+.top-battle-scene-holder {
+    -fx-pref-width: 700px;
+    -fx-pref-height: 450px;
+}
+
 .bottom-move-holder {
     -fx-pref-width: 700px;
     -fx-pref-height: 150px;
@@ -5,7 +10,6 @@
     -fx-effect: dropshadow(three-pass-box, #000, 10, 0, 0, 0);
 }
 
-.top-battle-scene-holder {
-    -fx-pref-width: 700px;
-    -fx-pref-height: 350px;
+.opponent-pokemon-image {
+
 }

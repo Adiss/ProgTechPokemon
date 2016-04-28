@@ -115,7 +115,7 @@ public class FxmlAccountPanelController implements Initializable {
                 FxmlBattleSceneController controller = new FxmlBattleSceneController(user);
                 loader.setController(controller);
                 root = loader.load();
-                Scene scene = new Scene(root, 700, 500);
+                Scene scene = new Scene(root, 700, 600);
                 stage.setScene(scene);
                 stage.show();
 
