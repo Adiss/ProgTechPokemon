@@ -6,10 +6,48 @@
 .bottom-move-holder {
     -fx-pref-width: 700px;
     -fx-pref-height: 150px;
-    -fx-background-color: #adff00;
+    -fx-background-image: url("../images/battle_bottom_bar_background.jpg");
+    -fx-effect: dropshadow(three-pass-box, #000, 10, 0, 0, 0);
+    -fx-tile-alignment: center;
+    -fx-pref-tile-width: 130px;
+    -fx-pref-tile-height: 60px;
+    -fx-padding: 45px 50px 45px 55px;
+    -fx-hgap: 20px;
+}
+
+.button {
+    -fx-background-color: white;
+    -fx-pref-width: 130px;
+    -fx-pref-height: 60px;
+    -fx-font-family: "Power Clear";
     -fx-effect: dropshadow(three-pass-box, #000, 10, 0, 0, 0);
 }
 
-.opponent-pokemon-image {
+.hpbar {
+    -fx-pref-width: 126px;
+}
 
+.hpbar > .bar {
+    -fx-background-color:
+            -fx-box-border,
+            linear-gradient(to bottom, derive(-fx-accent,95%), derive(-fx-accent,10%)),
+            limegreen;
+    -fx-background-insets: 0, 1, 2;
+    -fx-padding: 0.4em; /* 5 */
+}
+
+.hpbar > .track {
+      -fx-text-box-border: black;
+      -fx-control-inner-background: black;
+  }
+
+.hp_panel {
+    -fx-background-image: url("../images/hp_panel.gif");
+    -fx-pref-width: 128px;
+    -fx-pref-height: 66px;
+    -fx-effect: dropshadow(three-pass-box, #000, 10, 0, 0, 0);
+}
+
+.hp_panel_text {
+    -fx-font-family: "Power Clear";
 }
