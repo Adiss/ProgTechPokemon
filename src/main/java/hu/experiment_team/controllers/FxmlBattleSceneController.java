@@ -120,15 +120,27 @@ public class FxmlBattleSceneController implements Initializable {
 
         if(trainer.getPartyPokemons().get(0).getMoves().size() > 0) {
             Move1Button.setText(trainer.getPartyPokemons().get(0).getMoves().get(0).getDisplayName());
+            Move1Button.setOnAction(event -> {
+                opponent.hurt(trainer.getOwnedPokemons().get(0), trainer.getOwnedPokemons().get(0).getMoves().get(0));
+            });
         }
         if(trainer.getPartyPokemons().get(0).getMoves().size() > 1) {
             Move2Button.setText(trainer.getPartyPokemons().get(0).getMoves().get(1).getDisplayName());
+            Move2Button.setOnAction(event -> {
+                opponent.hurt(trainer.getOwnedPokemons().get(0), trainer.getOwnedPokemons().get(0).getMoves().get(1));
+            });
         }
         if(trainer.getPartyPokemons().get(0).getMoves().size() > 2) {
             Move3Button.setText(trainer.getPartyPokemons().get(0).getMoves().get(2).getDisplayName());
+            Move3Button.setOnAction(event -> {
+                opponent.hurt(trainer.getOwnedPokemons().get(0), trainer.getOwnedPokemons().get(0).getMoves().get(2));
+            });
         }
         if(trainer.getPartyPokemons().get(0).getMoves().size() > 3) {
             Move4Button.setText(trainer.getPartyPokemons().get(0).getMoves().get(3).getDisplayName());
+            Move4Button.setOnAction(event -> {
+                opponent.hurt(trainer.getOwnedPokemons().get(0), trainer.getOwnedPokemons().get(0).getMoves().get(3));
+            });
         }
 
     }
