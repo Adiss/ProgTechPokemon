@@ -15,7 +15,8 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Created by Jakab on 2016.05.06..
+ * Ez az osztály hajtja végre az adatbázis műveleteket.
+ * @author Jakab Ádám
  */
 public enum PokemonDAO implements MoveDaoInterface, PokemonDaoInterface, TrainerDaoInterface{
     INSTANCE;
