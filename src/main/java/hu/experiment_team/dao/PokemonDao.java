@@ -1,208 +1,186 @@
 package hu.experiment_team.dao;
 
+import hu.experiment_team.dao.interfaces.MoveDaoInterface;
 import hu.experiment_team.dao.interfaces.PokemonDaoInterface;
-import hu.experiment_team.models.OwnedPokemon;
+import hu.experiment_team.dao.interfaces.TrainerDaoInterface;
+import hu.experiment_team.models.BasicPokemon;
+import hu.experiment_team.models.Move;
+import hu.experiment_team.models.Pokemon;
+import hu.experiment_team.models.Trainer;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import java.util.List;
-import java.util.Properties;
 import java.util.Random;
 
 /**
- * Ez az osztály fogja kezelni a pokémonokkal kapcsolatos adatbázis műveleteket.
- * Singleton osztály, nem kell példányosítani, az INSTANCE-on keresztül használható.
- * */
-public enum PokemonDao implements PokemonDaoInterface {
+ * Created by Jakab on 2016.05.06..
+ */
+public enum PokemonDAO implements MoveDaoInterface, PokemonDaoInterface, TrainerDaoInterface{
+    INSTANCE;
+
+    private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("PokemonDAO");
+    private EntityManager entityManager = entityManagerFactory.createEntityManager();
 
     /**
-     * Ezen a mezőn keresztül érhetőek el az osztály metódusai.
+     * A megadott ID alapján lekérdez egy teljes képességet az adatbázisból.
+     * @param moveId A képesség adatbázis beli ID-je
      * */
-    INSTANCE;
+    public Move getMoveById(int moveId){
+        return entityManager.find(Move.class, moveId);
+    }
+
     /**
-     * Létrehozunk egy props változót a properties fájlnak, amiben az adatbázis eléréséhez szükséges információk vannak.
+     * A megadott pokemon ID és szint alapján lekérdezi az adott pokemon adott szintjén és alatta tudható spelleket.
+     * @param level A pokémon szintje.
+     * @param pokemonId A pokémon ID-je
      * */
-    Properties props = new Properties();
-    InputStream propFile = getClass().getResourceAsStream("/database.properties");
+    public List<Move> getKnownMove(int level, int pokemonId){
+        return entityManager.createQuery("SELECT m FROM Move m WHERE m.Id IN (SELECT moveId FROM PokemonMovesByLevelTable WHERE plevel <= " + level + " AND pokemonId = " + pokemonId + ")", Move.class).getResultList();
+    }
+
     /**
-     * This contains the actual connection.
+     * Lekérdezi az adatbázisból az összes spellt egy listába.
      * */
-    private Connection conn = null;
+    public List<Move> pullMoves(){
+        return entityManager.createQuery("SELECT m FROM Move m", Move.class).getResultList();
+    }
+
     /**
-     * This contains the mysql statement.
+     * Hozzáad egy trainert (felhasználót) az adatbázishoz.
+     * @param t A trainer osztály egy példánya a megfelelő mezőkkel feltöltve.
      * */
-    private PreparedStatement prepStmt = null;
+    public void insertTrainer(Trainer t){
+        entityManager.getTransaction().begin();
+        entityManager.persist(t);
+        entityManager.getTransaction().commit();
+    }
+
     /**
-     * This contains the result of the query.
+     * Kiválaszt egy trainert (felhasználót) a neve alapján.
+     * @param username A trainer felhasználó neve.
      * */
-    private ResultSet rs = null;
+    public Trainer selectTrainerByName(String username){
+        Trainer t = entityManager.createQuery("SELECT t FROM Trainer t WHERE t.username = '" + username + "'", Trainer.class).getSingleResult();
+        t.setOwnedPokemons(getOwnedPokemons(t.getId()));
+        return t;
+    }
+
+    /**
+     * Kiválaszt egy trainert (felhasználót) a jelszava alapján.
+     * Ennek a jelszónak már az SHA1 kódolt jelszónak kell lennie.
+     * @param pass SHA1 kódolt jelszó.
+     * */
+    public Trainer selectTrainerByPassword(String pass){
+        Trainer t = entityManager.createQuery("SELECT t FROM Trainer t WHERE t.password = '" + pass + "'", Trainer.class).getSingleResult();
+        t.setOwnedPokemons(getOwnedPokemons(t.getId()));
+        return t;
+    }
+
+    /**
+     * Kiválaszt egy trainert (felhasználót) az e-mail címe alapján.
+     * @param email A trainer email címe.
+     * */
+    public Trainer selectTrainerByEmail(String email){
+        Trainer t = entityManager.createQuery("SELECT t FROM Trainer t WHERE t.email = '" + email + "'", Trainer.class).getSingleResult();
+        t.setOwnedPokemons(getOwnedPokemons(t.getId()));
+        return t;
+    }
 
     /**
      * A megadott pokémon ID alapján lekérdez az adatbázisból egy alap pokémont.
      * @param pokemonId a pokémon adatbázis beli ID-je
      * */
-    @Override
-    public OwnedPokemon getPokemonById(int pokemonId){
+    public Pokemon getPokemonById(int pokemonId){
+        BasicPokemon bp = entityManager.find(BasicPokemon.class, pokemonId);
+        List<Move> moves = PokemonDAO.INSTANCE.getKnownMove(1, bp.getId());
+        Pokemon p = new Pokemon();
 
-        try {
-            props.load(propFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        p.setId(bp.getId());
+        p.setDisplayName(bp.getDisplayName());
+        p.setType1(bp.getType1());
+        p.setType2(bp.getType2());
+        p.setHp(bp.getHp());
+        p.setAttack(bp.getAttack());
+        p.setDefense(bp.getDefense());
+        p.setSpeed(bp.getSpeed());
+        p.setSpecialAttack(bp.getSpecialAttack());
+        p.setSpecialDefense(bp.getSpecialDefense());
+        p.setHiddenAbility(bp.getHiddenAbility());
+        p.setCurrentXp(0);
+        p.setLevel(1);
+        if(moves.size() >= 1)
+            p.setMove1(moves.get(0));
+        if(moves.size() >= 2)
+            p.setMove2(moves.get(1));
+        if(moves.size() >= 3)
+            p.setMove3(moves.get(2));
+        if(moves.size() >= 4)
+            p.setMove4(moves.get(3));
+        p.setLastMove(null);
+        p.setClonedOne();
 
-        OwnedPokemon p = null;
-        String selectStatement = "SELECT * FROM POKEMON_POKEMONS WHERE id = ?";
-        try{
-            Class.forName(props.getProperty("db.driver"));
-            conn = DriverManager.getConnection(props.getProperty("db.host"), props.getProperty("db.username"), props.getProperty("db.password"));
-
-            prepStmt = conn.prepareStatement(selectStatement);
-            prepStmt.setInt(1, pokemonId);
-            rs = prepStmt.executeQuery();
-            while(rs.next()){
-                p = new OwnedPokemon(rs.getInt("POKEMONID"), rs.getString("DISPLAYNAME"), rs.getString("TYPE1"),
-                        rs.getString("TYPE2"), rs.getString("HIDDENABILITY"), rs.getInt("HP"), rs.getInt("ATTACK"),
-                        rs.getInt("DEFENSE"), rs.getInt("SPEED"), rs.getInt("SPATTACK"), rs.getInt("SPDEFENSE"), rs.getInt("pokemonlevel"));
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            close();
-        }
         return p;
     }
-
 
     /**
      * Kiválaszt egy random alap pokémont az adatbázisból.
-     * TODO -> NEM IGEN VANNAK SPELLJEI? SEM ITT SEM A GETOWNEDBEN? ELLENŐRIZNI KELL!
      * */
-    @Override
-    public OwnedPokemon getRandomPokemon(int level){
-
-        try {
-            props.load(propFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        List<Integer> moveIds = null;
+    public Pokemon getRandomPokemon(int level){
         Random r = new Random();
-        OwnedPokemon p = null;
-        String selectStatement = "SELECT * FROM POKEMON_POKEMONS WHERE id = ?";
-        try{
-            Class.forName(props.getProperty("db.driver"));
-            conn = DriverManager.getConnection(props.getProperty("db.host"), props.getProperty("db.username"), props.getProperty("db.password"));
-            prepStmt = conn.prepareStatement(selectStatement);
-            prepStmt.setInt(1, r.nextInt(649-1) + 1);
-            rs = prepStmt.executeQuery();
-            while(rs.next()){
-                moveIds = MoveDao.INSTANCE.getKnownMove(level, rs.getInt("ID"));
-                p = new OwnedPokemon(rs.getInt("ID"), rs.getString("DISPLAYNAME"), rs.getString("TYPE1"),
-                        rs.getString("TYPE2"), rs.getString("HIDDENABILITY"), rs.getInt("HP"), rs.getInt("ATTACK"),
-                        rs.getInt("DEFENSE"), rs.getInt("SPEED"), rs.getInt("SPATTACK"), rs.getInt("SPDEFENSE"), level);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            close();
-        }
+
+        BasicPokemon bp = entityManager.find(BasicPokemon.class, r.nextInt(649)+1);
+        List<Move> moves = getKnownMove(level, bp.getId());
+        Pokemon p = new Pokemon();
+
+        p.setId(bp.getId());
+        p.setDisplayName(bp.getDisplayName());
+        p.setType1(bp.getType1());
+        p.setType2(bp.getType2());
+        p.setHp(bp.getHp());
+        p.setAttack(bp.getAttack());
+        p.setDefense(bp.getDefense());
+        p.setSpeed(bp.getSpeed());
+        p.setSpecialAttack(bp.getSpecialAttack());
+        p.setSpecialDefense(bp.getSpecialDefense());
+        p.setHiddenAbility(bp.getHiddenAbility());
+        p.setCurrentXp(0);
+        p.setLevel(level);
+        if(moves.size() >= 1)
+            p.setMove1(moves.get(0));
+        if(moves.size() >= 2)
+            p.setMove2(moves.get(1));
+        if(moves.size() >= 3)
+            p.setMove3(moves.get(2));
+        if(moves.size() >= 4)
+            p.setMove4(moves.get(3));
+        p.setLastMove(null);
+        p.setClonedOne();
+
         return p;
     }
 
-    @Override
-    public void addOwnedPokemon(int id, OwnedPokemon p) {
-
-        try {
-            props.load(propFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        String insertStatement = "INSERT INTO POKEMON_OWNED_POKEMONS (ownerId, pokemonId, displayName, type1, type2, pokemonlevel, hp, attack, defense, speed, spAttack, spDefense, currentXp, hiddenAbility, move1Id, move2Id, move3Id, move4Id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        try{
-            List<Integer> moveIds = MoveDao.INSTANCE.getKnownMove(1, p.getId());
-            Class.forName(props.getProperty("db.driver"));
-            conn = DriverManager.getConnection(props.getProperty("db.host"), props.getProperty("db.username"), props.getProperty("db.password"));
-            prepStmt = conn.prepareStatement(insertStatement);
-            prepStmt.setInt(1, id);
-            prepStmt.setInt(2, p.getId());
-            prepStmt.setString(3, p.getDisplayName());
-            prepStmt.setString(4, p.getType1());
-            prepStmt.setString(5, p.getType2());
-            prepStmt.setInt(6, 1);
-            prepStmt.setInt(7, p.getStats().hp);
-            prepStmt.setInt(8, p.getStats().attack);
-            prepStmt.setInt(9, p.getStats().defense);
-            prepStmt.setInt(10, p.getStats().speed);
-            prepStmt.setInt(11, p.getStats().specialAttack);
-            prepStmt.setInt(12, p.getStats().specialDefense);
-            prepStmt.setInt(13, 0);
-            prepStmt.setString(14, p.getHiddenAbility());
-            prepStmt.setInt(15, moveIds.get(0));
-            if(moveIds.size() >= 2) prepStmt.setInt(16, moveIds.get(1)); else prepStmt.setInt(16, 0);
-            if(moveIds.size() >= 3) prepStmt.setInt(17, moveIds.get(2)); else prepStmt.setInt(17, 0);
-            if(moveIds.size() == 4) prepStmt.setInt(18, moveIds.get(3)); else prepStmt.setInt(18, 0);
-            prepStmt.executeUpdate();
-        }  catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            close();
-        }
+    /**
+     * Hozzáad egy pokémont a trainerhez, majd berakja az adatbázisba.
+     * @param id A trainer azonosító száma
+     * @param p A Pokémon objektuma
+     */
+    public void addOwnedPokemon(int id, Pokemon p) {
+        entityManager.getTransaction().begin();
+        p.setOwnerId(id);
+        entityManager.persist(p);
+        entityManager.getTransaction().commit();
     }
 
-    @Override
-    public List<OwnedPokemon> getOwnedPokemons(int id) {
-        try {
-            props.load(propFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        List<OwnedPokemon> owneds = new ArrayList<>();
-        String selectStatement = "SELECT * FROM POKEMON_OWNED_POKEMONS WHERE ownerid = ?";
-        try{
-            Class.forName(props.getProperty("db.driver"));
-            conn = DriverManager.getConnection(props.getProperty("db.host"), props.getProperty("db.username"), props.getProperty("db.password"));
-            prepStmt = conn.prepareStatement(selectStatement);
-            prepStmt.setInt(1, id);
-            rs = prepStmt.executeQuery();
-            while(rs.next()){
-                owneds.add(new OwnedPokemon(rs.getInt("POKEMONID"), rs.getString("DISPLAYNAME"), rs.getString("TYPE1"),
-                        rs.getString("TYPE2"), rs.getString("HIDDENABILITY"), rs.getInt("HP"), rs.getInt("ATTACK"),
-                        rs.getInt("DEFENSE"), rs.getInt("SPEED"), rs.getInt("SPATTACK"), rs.getInt("SPDEFENSE"), rs.getInt("pokemonlevel")));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            close();
-        }
-        return owneds;
-    }
 
     /**
-     * Ez a függvény fogja lezárni az adatbázis kapcsolatokat.
-     * */
-    private void close() {
-        try {
-            if (this.rs != null) {
-                this.rs.close();
-            }
-            if (this.prepStmt != null) {
-                this.prepStmt.close();
-            }
-            if (this.conn != null) {
-                this.conn.close();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+     * Visszaadja egy listába az össze pokémont, amit a trainer birtokol.
+     * @param id A trainer azonosító száma
+     * @return A birtokolt pokémonok listája
+     */
+    public List<Pokemon> getOwnedPokemons(int id) {
+        return entityManager.createQuery("SELECT p FROM Pokemon p WHERE p.ownerId = " + id, Pokemon.class).getResultList();
     }
 
 }
