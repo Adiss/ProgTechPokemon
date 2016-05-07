@@ -57,39 +57,39 @@ public enum Effectiveness {
         typeEffectiveness.put("ICEGROUND", 2.0);typeEffectiveness.put("ICEFLYING", 2.0);typeEffectiveness.put("ICEPSYCHIC", 1.0);typeEffectiveness.put("ICEBUG", 1.0);
         typeEffectiveness.put("ICEROCK", 1.0);typeEffectiveness.put("ICEGHOST", 1.0);typeEffectiveness.put("ICEDRAGON", 2.0);typeEffectiveness.put("ICEDARK", 1.0);
         typeEffectiveness.put("ICESTEEL", 0.5);typeEffectiveness.put("ICEFAIRY", 1.0);
-        // ING
-        typeEffectiveness.put("INGNORMAL", 2.0);typeEffectiveness.put("INGFIRE", 1.0);typeEffectiveness.put("INGWATER", 1.0);typeEffectiveness.put("INGELECTRIC", 1.0);
-        typeEffectiveness.put("INGGRASS", 1.0);typeEffectiveness.put("INGICE", 2.0);typeEffectiveness.put("INGING", 1.0);typeEffectiveness.put("INGPOISON", 0.5);
-        typeEffectiveness.put("INGGROUND", 1.0);typeEffectiveness.put("INGFLYING", 0.5);typeEffectiveness.put("INGPSYCHIC", 0.5);typeEffectiveness.put("INGBUG", 0.5);
-        typeEffectiveness.put("INGROCK", 2.0);typeEffectiveness.put("INGGHOST", 0.0);typeEffectiveness.put("INGDRAGON", 1.0);typeEffectiveness.put("INGDARK", 2.0);
-        typeEffectiveness.put("INGSTEEL", 2.0);typeEffectiveness.put("INGFAIRY", 0.5);
+        // FIGHTING
+        typeEffectiveness.put("FIGHTINGNORMAL", 2.0);typeEffectiveness.put("FIGHTINGFIRE", 1.0);typeEffectiveness.put("FIGHTINGWATER", 1.0);typeEffectiveness.put("FIGHTINGELECTRIC", 1.0);
+        typeEffectiveness.put("FIGHTINGGRASS", 1.0);typeEffectiveness.put("FIGHTINGICE", 2.0);typeEffectiveness.put("FIGHTINGFIGHTING", 1.0);typeEffectiveness.put("FIGHTINGPOISON", 0.5);
+        typeEffectiveness.put("FIGHTINGGROUND", 1.0);typeEffectiveness.put("FIGHTINGFLYFIGHTING", 0.5);typeEffectiveness.put("FIGHTINGPSYCHIC", 0.5);typeEffectiveness.put("FIGHTINGBUG", 0.5);
+        typeEffectiveness.put("FIGHTINGROCK", 2.0);typeEffectiveness.put("FIGHTINGGHOST", 0.0);typeEffectiveness.put("FIGHTINGDRAGON", 1.0);typeEffectiveness.put("FIGHTINGDARK", 2.0);
+        typeEffectiveness.put("FIGHTINGSTEEL", 2.0);typeEffectiveness.put("FIGHTINGFAIRY", 0.5);
         // POISON
         typeEffectiveness.put("POISONNORMAL", 1.0);typeEffectiveness.put("POISONFIRE", 1.0);typeEffectiveness.put("POISONWATER", 1.0);typeEffectiveness.put("POISONELECTRIC", 1.0);
-        typeEffectiveness.put("POISONGRASS", 2.0);typeEffectiveness.put("POISONICE", 1.0);typeEffectiveness.put("POISONING", 1.0);typeEffectiveness.put("POISONPOISON", 0.5);
+        typeEffectiveness.put("POISONGRASS", 2.0);typeEffectiveness.put("POISONICE", 1.0);typeEffectiveness.put("POISONFIGHTING", 1.0);typeEffectiveness.put("POISONPOISON", 0.5);
         typeEffectiveness.put("POISONGROUND", 0.5);typeEffectiveness.put("POISONFLYING", 1.0);typeEffectiveness.put("POISONPSYCHIC", 1.0);typeEffectiveness.put("POISONBUG", 1.0);
         typeEffectiveness.put("POISONROCK", 0.5);typeEffectiveness.put("POISONGHOST", 0.5);typeEffectiveness.put("POISONDRAGON", 1.0);typeEffectiveness.put("POISONDARK", 1.0);
         typeEffectiveness.put("POISONSTEEL", 0.0);typeEffectiveness.put("POISONFAIRY", 2.0);
         // GROUND
         typeEffectiveness.put("GROUNDNORMAL", 1.0);typeEffectiveness.put("GROUNDFIRE", 2.0);typeEffectiveness.put("GROUNDWATER", 1.0);typeEffectiveness.put("GROUNDELECTRIC", 2.0);
-        typeEffectiveness.put("GROUNDGRASS", 0.5);typeEffectiveness.put("GROUNDICE", 1.0);typeEffectiveness.put("GROUNDING", 1.0);typeEffectiveness.put("GROUNDPOISON", 2.0);
-        typeEffectiveness.put("GROUNDGROUND", 1.0);typeEffectiveness.put("GROUNDFLYING", 0.0);typeEffectiveness.put("GROUNDPSYCHIC", 1.0);typeEffectiveness.put("GROUNDBUG", 0.5);
+        typeEffectiveness.put("GROUNDGRASS", 0.5);typeEffectiveness.put("GROUNDICE", 1.0);typeEffectiveness.put("GROUNDFIGHTING", 1.0);typeEffectiveness.put("GROUNDPOISON", 2.0);
+        typeEffectiveness.put("GROUNDGROUND", 1.0);typeEffectiveness.put("GROUNDFLYFIGHTING", 0.0);typeEffectiveness.put("GROUNDPSYCHIC", 1.0);typeEffectiveness.put("GROUNDBUG", 0.5);
         typeEffectiveness.put("GROUNDROCK", 2.0);typeEffectiveness.put("GROUNDGHOST", 1.0);typeEffectiveness.put("GROUNDDRAGON", 1.0);typeEffectiveness.put("GROUNDDARK", 1.0);
         typeEffectiveness.put("GROUNDSTEEL", 2.0);typeEffectiveness.put("GROUNDFAIRY", 1.0);
         // FLYING
         typeEffectiveness.put("FLYINGNORMAL", 1.0);typeEffectiveness.put("FLYINGFIRE", 1.0);typeEffectiveness.put("FLYINGWATER", 1.0);typeEffectiveness.put("FLYINGELECTRIC", 0.5);
-        typeEffectiveness.put("FLYINGGRASS", 2.0);typeEffectiveness.put("FLYINGICE", 1.0);typeEffectiveness.put("FLYINGING", 2.0);typeEffectiveness.put("FLYINGPOISON", 2.0);
+        typeEffectiveness.put("FLYINGGRASS", 2.0);typeEffectiveness.put("FLYINGICE", 1.0);typeEffectiveness.put("FLYINGFIGHTING", 2.0);typeEffectiveness.put("FLYFIGHTINGPOISON", 2.0);
         typeEffectiveness.put("FLYINGGROUND", 1.0);typeEffectiveness.put("FLYINGFLYING", 1.0);typeEffectiveness.put("FLYINGPSYCHIC", 1.0);typeEffectiveness.put("FLYINGBUG", 2.0);
         typeEffectiveness.put("FLYINGROCK", 0.5);typeEffectiveness.put("FLYINGGHOST", 1.0);typeEffectiveness.put("FLYINGDRAGON", 1.0);typeEffectiveness.put("FLYINGDARK", 1.0);
         typeEffectiveness.put("FLYINGSTEEL", 0.5);typeEffectiveness.put("FLYINGFAIRY", 1.0);
         // PSYCHIC
         typeEffectiveness.put("PSYCHICNORMAL", 1.0);typeEffectiveness.put("PSYCHICFIRE", 1.0);typeEffectiveness.put("PSYCHICWATER", 1.0);typeEffectiveness.put("PSYCHICELECTRIC", 1.0);
-        typeEffectiveness.put("PSYCHICGRASS", 1.0);typeEffectiveness.put("PSYCHICICE", 1.0);typeEffectiveness.put("PSYCHICING", 2.0);typeEffectiveness.put("PSYCHICPOISON", 2.0);
+        typeEffectiveness.put("PSYCHICGRASS", 1.0);typeEffectiveness.put("PSYCHICICE", 1.0);typeEffectiveness.put("PSYCHICFIGHTING", 2.0);typeEffectiveness.put("PSYCHICPOISON", 2.0);
         typeEffectiveness.put("PSYCHICGROUND", 1.0);typeEffectiveness.put("PSYCHICFLYING", 1.0);typeEffectiveness.put("PSYCHICPSYCHIC", 0.5);typeEffectiveness.put("PSYCHICBUG", 1.0);
         typeEffectiveness.put("PSYCHICROCK", 1.0);typeEffectiveness.put("PSYCHICGHOST", 1.0);typeEffectiveness.put("PSYCHICDRAGON", 1.0);typeEffectiveness.put("PSYCHICDARK", 0.0);
         typeEffectiveness.put("PSYCHICSTEEL", 0.5);typeEffectiveness.put("PSYCHICFAIRY", 1.0);
         // BUG
         typeEffectiveness.put("BUGNORMAL", 1.0);typeEffectiveness.put("BUGFIRE", 0.5);typeEffectiveness.put("BUGWATER", 1.0);typeEffectiveness.put("BUGELECTRIC", 1.0);
-        typeEffectiveness.put("BUGGRASS", 2.0);typeEffectiveness.put("BUGICE", 1.0);typeEffectiveness.put("BUGING", 0.5);typeEffectiveness.put("BUGPOISON", 0.5);
+        typeEffectiveness.put("BUGGRASS", 2.0);typeEffectiveness.put("BUGICE", 1.0);typeEffectiveness.put("BUGFIGHTING", 0.5);typeEffectiveness.put("BUGPOISON", 0.5);
         typeEffectiveness.put("BUGGROUND", 1.0);typeEffectiveness.put("BUGFLYING", 0.5);typeEffectiveness.put("BUGPSYCHIC", 2.0);typeEffectiveness.put("BUGBUG", 1.0);
         typeEffectiveness.put("BUGROCK", 1.0);typeEffectiveness.put("BUGGHOST", 0.5);typeEffectiveness.put("BUGDRAGON", 1.0);typeEffectiveness.put("BUGDARK", 2.0);
         typeEffectiveness.put("BUGSTEEL", 0.5);typeEffectiveness.put("BUGFAIRY", 0.5);
@@ -101,31 +101,31 @@ public enum Effectiveness {
         typeEffectiveness.put("ROCKSTEEL", 0.5);typeEffectiveness.put("ROCKFAIRY", 1.0);
         // GHOST
         typeEffectiveness.put("GHOSTNORMAL", 0.0);typeEffectiveness.put("GHOSTFIRE", 1.0);typeEffectiveness.put("GHOSTWATER", 1.0);typeEffectiveness.put("GHOSTELECTRIC", 1.0);
-        typeEffectiveness.put("GHOSTGRASS", 1.0);typeEffectiveness.put("GHOSTICE", 1.0);typeEffectiveness.put("GHOSTING", 1.0);typeEffectiveness.put("GHOSTPOISON", 1.0);
+        typeEffectiveness.put("GHOSTGRASS", 1.0);typeEffectiveness.put("GHOSTICE", 1.0);typeEffectiveness.put("GHOSTFIGHTING", 1.0);typeEffectiveness.put("GHOSTPOISON", 1.0);
         typeEffectiveness.put("GHOSTGROUND", 1.0);typeEffectiveness.put("GHOSTFLYING", 1.0);typeEffectiveness.put("GHOSTPSYCHIC", 2.0);typeEffectiveness.put("GHOSTBUG", 1.0);
         typeEffectiveness.put("GHOSTROCK", 1.0);typeEffectiveness.put("GHOSTGHOST", 2.0);typeEffectiveness.put("GHOSTDRAGON", 1.0);typeEffectiveness.put("GHOSTDARK", 0.5);
         typeEffectiveness.put("GHOSTSTEEL", 1.0);typeEffectiveness.put("GHOSTFAIRY", 1.0);
         // DRAGON
         typeEffectiveness.put("DRAGONNORMAL", 1.0);typeEffectiveness.put("DRAGONFIRE", 1.0);typeEffectiveness.put("DRAGONWATER", 1.0);typeEffectiveness.put("DRAGONELECTRIC", 1.0);
-        typeEffectiveness.put("DRAGONGRASS", 1.0);typeEffectiveness.put("DRAGONICE", 1.0);typeEffectiveness.put("DRAGONING", 1.0);typeEffectiveness.put("DRAGONPOISON", 1.0);
+        typeEffectiveness.put("DRAGONGRASS", 1.0);typeEffectiveness.put("DRAGONICE", 1.0);typeEffectiveness.put("DRAGONFIGHTING", 1.0);typeEffectiveness.put("DRAGONPOISON", 1.0);
         typeEffectiveness.put("DRAGONGROUND", 1.0);typeEffectiveness.put("DRAGONFLYING", 1.0);typeEffectiveness.put("DRAGONPSYCHIC", 1.0);typeEffectiveness.put("DRAGONBUG", 1.0);
         typeEffectiveness.put("DRAGONROCK", 1.0);typeEffectiveness.put("DRAGONGHOST", 1.0);typeEffectiveness.put("DRAGONDRAGON", 2.0);typeEffectiveness.put("DRAGONDARK", 1.0);
         typeEffectiveness.put("DRAGONSTEEL", 0.5);typeEffectiveness.put("DRAGONFAIRY", 0.0);
         // DARK
         typeEffectiveness.put("DARKNORMAL", 1.0);typeEffectiveness.put("DARKFIRE", 1.0);typeEffectiveness.put("DARKWATER", 1.0);typeEffectiveness.put("DARKELECTRIC", 1.0);
-        typeEffectiveness.put("DARKGRASS", 1.0);typeEffectiveness.put("DARKICE", 1.0);typeEffectiveness.put("DARKING", 0.5);typeEffectiveness.put("DARKPOISON", 1.0);
-        typeEffectiveness.put("DARKGROUND", 1.0);typeEffectiveness.put("DARKFLYING", 1.0);typeEffectiveness.put("DARKPSYCHIC", 2.0);typeEffectiveness.put("DARKBUG", 1.0);
+        typeEffectiveness.put("DARKGRASS", 1.0);typeEffectiveness.put("DARKICE", 1.0);typeEffectiveness.put("DARKFIGHTING", 0.5);typeEffectiveness.put("DARKPOISON", 1.0);
+        typeEffectiveness.put("DARKGROUND", 1.0);typeEffectiveness.put("DARKFLYFIGHTING", 1.0);typeEffectiveness.put("DARKPSYCHIC", 2.0);typeEffectiveness.put("DARKBUG", 1.0);
         typeEffectiveness.put("DARKROCK", 1.0);typeEffectiveness.put("DARKGHOST", 2.0);typeEffectiveness.put("DARKDRAGON", 1.0);typeEffectiveness.put("DARKDARK", 0.5);
         typeEffectiveness.put("DARKSTEEL", 1.0);typeEffectiveness.put("DARKFAIRY", 0.5);
         // STEEL
         typeEffectiveness.put("STEELNORMAL", 1.0);typeEffectiveness.put("STEELFIRE", 0.5);typeEffectiveness.put("STEELWATER", 0.5);typeEffectiveness.put("STEELELECTRIC", 0.5);
-        typeEffectiveness.put("STEELGRASS", 1.0);typeEffectiveness.put("STEELICE", 2.0);typeEffectiveness.put("STEELING", 1.0);typeEffectiveness.put("STEELPOISON", 1.0);
+        typeEffectiveness.put("STEELGRASS", 1.0);typeEffectiveness.put("STEELICE", 2.0);typeEffectiveness.put("STEELFIGHTING", 1.0);typeEffectiveness.put("STEELPOISON", 1.0);
         typeEffectiveness.put("STEELGROUND", 1.0);typeEffectiveness.put("STEELFLYING", 1.0);typeEffectiveness.put("STEELPSYCHIC", 1.0);typeEffectiveness.put("STEELBUG", 1.0);
         typeEffectiveness.put("STEELROCK", 2.0);typeEffectiveness.put("STEELGHOST", 1.0);typeEffectiveness.put("STEELDRAGON", 1.0);typeEffectiveness.put("STEELDARK", 1.0);
         typeEffectiveness.put("STEELSTEEL", 0.5);typeEffectiveness.put("STEELFAIRY", 2.0);
         // FAIRY
         typeEffectiveness.put("FAIRYNORMAL", 1.0);typeEffectiveness.put("FAIRYFIRE", 0.5);typeEffectiveness.put("FAIRYWATER", 1.0);typeEffectiveness.put("FAIRYELECTRIC", 1.0);
-        typeEffectiveness.put("FAIRYGRASS", 1.0);typeEffectiveness.put("FAIRYICE", 1.0);typeEffectiveness.put("FAIRYING", 2.0);typeEffectiveness.put("FAIRYPOISON", 0.5);
+        typeEffectiveness.put("FAIRYGRASS", 1.0);typeEffectiveness.put("FAIRYICE", 1.0);typeEffectiveness.put("FAIRYFIGHTING", 2.0);typeEffectiveness.put("FAIRYPOISON", 0.5);
         typeEffectiveness.put("FAIRYGROUND", 1.0);typeEffectiveness.put("FAIRYFLYING", 1.0);typeEffectiveness.put("FAIRYPSYCHIC", 1.0);typeEffectiveness.put("FAIRYBUG", 1.0);
         typeEffectiveness.put("FAIRYROCK", 1.0);typeEffectiveness.put("FAIRYGHOST", 1.0);typeEffectiveness.put("FAIRYDRAGON", 2.0);typeEffectiveness.put("FAIRYDARK", 2.0);
         typeEffectiveness.put("FAIRYSTEEL", 0.5);typeEffectiveness.put("FAIRYFAIRY", 1.0);

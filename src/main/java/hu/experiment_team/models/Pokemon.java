@@ -2,6 +2,8 @@ package hu.experiment_team.models;
 
 import hu.experiment_team.Effectiveness;
 import hu.experiment_team.Move_Functions;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 import javax.persistence.*;
 import java.lang.reflect.InvocationTargetException;
@@ -61,22 +63,24 @@ public class Pokemon implements Cloneable {
      * Each value can be between 0 and 255.
      * */
     @Column(name = "hp")
-    public int hp;
+    private int hp;
+    @Transient
+    private IntegerProperty hpProperty = new SimpleIntegerProperty(0);
     @Column(name = "attack")
-    public int attack;
+    private int attack;
     @Column(name = "defense")
-    public int defense;
+    private int defense;
     @Column(name = "speed")
-    public int speed;
+    private int speed;
     @Column(name = "spAttack")
-    public int specialAttack;
+    private int specialAttack;
     @Column(name = "spDefense")
-    public int specialDefense;
+    private int specialDefense;
 
     @Transient
-    public int accuracy = 100;
+    private int accuracy = 100;
     @Transient
-    public int criticalChance = 0;
+    private int criticalChance = 0;
 
     /**
      * Up to 4 additional abilities this species can have.
@@ -132,29 +136,29 @@ public class Pokemon implements Cloneable {
      * A pokémon harc közbeni effektjeinek egy gyűjtő osztálya.
      * */
     @Transient
-    public int sleep = 0;
+    private int sleep = 0;
     @Transient
-    public int drowsy = 0;
+    private int drowsy = 0;
     @Transient
-    public int poison = 0;
+    private int poison = 0;
     @Transient
-    public int badlyPoison = 0;
+    private int badlyPoison = 0;
     @Transient
-    public int paralyze = 0;
+    private int paralyze = 0;
     @Transient
-    public int burn = 0;
+    private int burn = 0;
     @Transient
-    public int flinch = 0;
+    private int flinch = 0;
     @Transient
-    public int freeze = 0;
+    private int freeze = 0;
     @Transient
-    public int minimized = 0;
+    private int minimized = 0;
     @Transient
-    public int confuse = 0;
+    private int confuse = 0;
     @Transient
-    public int attract = 0;
+    private int attract = 0;
     @Transient
-    public int evasion = 0;
+    private int evasion = 0;
 
     /**
      * Paraméter nélküli konstruktor a JPA-nak
@@ -201,7 +205,7 @@ public class Pokemon implements Cloneable {
         if(!move.getType().equals("Status")){
 
             // Count damage
-            int damage = 0;
+            int damage;
             double STAB = attacker.getType1().equals(move.getType()) || attacker.getType2().equals(move.getType()) ? 1.5 : 1.0;
             double typeEffectiveness = Effectiveness.INSTANCE.get(move.getType(), this.getType1())*10;
             Random r = new Random();
@@ -377,6 +381,7 @@ public class Pokemon implements Cloneable {
 
     public void setHp(int hp) {
         this.hp = hp;
+        this.hpProperty.setValue(hp);
     }
 
     public int getAttack() {
@@ -529,6 +534,14 @@ public class Pokemon implements Cloneable {
 
     public void setEvasion(int evasion) {
         this.evasion = evasion;
+    }
+
+    public IntegerProperty gethpProperty() {
+        return hpProperty;
+    }
+
+    public void setHpProperty(int hpProperty) {
+        this.hpProperty.set(hpProperty);
     }
 
     @Override

@@ -4,6 +4,7 @@ import hu.experiment_team.PokemonUtils;
 import hu.experiment_team.dao.PokemonDAO;
 import hu.experiment_team.models.Pokemon;
 import hu.experiment_team.models.Trainer;
+import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -61,9 +62,16 @@ public class FxmlBattleSceneController implements Initializable {
 
     private int rand;
 
+    private ChangeListener OpponentPokemonHpchangeListener = (observableValue, oldValue, newValue) -> {
+        double oldV = opponent.getClonedOne().getHp();
+        double newV = (int)newValue;
+        OpponentPokemonHpProgressBar.progressProperty().set(newV / oldV);
+    };
+
     public FxmlBattleSceneController(Trainer t) {
         this.trainer = t;
         this.opponent = PokemonDAO.INSTANCE.getRandomPokemon(t.getPartyPokemons().get(0).getLevel());
+        opponent.gethpProperty().addListener(OpponentPokemonHpchangeListener);
         this.r = new Random();
     }
 
@@ -110,8 +118,8 @@ public class FxmlBattleSceneController implements Initializable {
         AnchorPane.setTopAnchor(OpponentPokemonHpText, 50.0);
         AnchorPane.setLeftAnchor(OpponentPokemonHpText, 60.0);
 
-        OpponentPokemonHpProgressBar.progressProperty().setValue(100);
-        MyPokemonHpProgressBar.progressProperty().setValue(100);
+        OpponentPokemonHpProgressBar.progressProperty().setValue(1);
+        MyPokemonHpProgressBar.progressProperty().setValue(1);
         AnchorPane.setTopAnchor(OpponentPokemonHpProgressBar, 39.0);
         AnchorPane.setLeftAnchor(OpponentPokemonHpProgressBar, 1.0);
         AnchorPane.setTopAnchor(MyPokemonHpProgressBar, 39.0);
