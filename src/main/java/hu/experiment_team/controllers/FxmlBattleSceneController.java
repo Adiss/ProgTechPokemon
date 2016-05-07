@@ -1,8 +1,7 @@
 package hu.experiment_team.controllers;
 
 import hu.experiment_team.PokemonUtils;
-import hu.experiment_team.dao.PokemonDao;
-import hu.experiment_team.models.OwnedPokemon;
+import hu.experiment_team.dao.PokemonDAO;
 import hu.experiment_team.models.Pokemon;
 import hu.experiment_team.models.Trainer;
 import javafx.fxml.FXML;
@@ -57,14 +56,14 @@ public class FxmlBattleSceneController implements Initializable {
 
 
     private Trainer trainer;
-    private OwnedPokemon opponent;
+    private Pokemon opponent;
     private Random r;
 
     private int rand;
 
     public FxmlBattleSceneController(Trainer t) {
         this.trainer = t;
-        this.opponent = PokemonDao.INSTANCE.getRandomPokemon(t.getPartyPokemons().get(0).getLevel());
+        this.opponent = PokemonDAO.INSTANCE.getRandomPokemon(t.getPartyPokemons().get(0).getLevel());
         this.r = new Random();
     }
 
@@ -100,14 +99,14 @@ public class FxmlBattleSceneController implements Initializable {
         MyPokemonName.setText(trainer.getPartyPokemons().get(0).getDisplayName());
         AnchorPane.setTopAnchor(MyPokemonName, 15.0);
         AnchorPane.setLeftAnchor(MyPokemonName, 10.0);
-        MyPokemonHpText.setText(String.valueOf(trainer.getPartyPokemons().get(0).getStats().hp));
+        MyPokemonHpText.setText(String.valueOf(trainer.getPartyPokemons().get(0).getHp()));
         AnchorPane.setTopAnchor(MyPokemonHpText, 50.0);
         AnchorPane.setLeftAnchor(MyPokemonHpText, 60.0);
 
         OpponentPokemonName.setText(opponent.getDisplayName());
         AnchorPane.setTopAnchor(OpponentPokemonName, 15.0);
         AnchorPane.setLeftAnchor(OpponentPokemonName, 10.0);
-        OpponentPokemonHpText.setText(String.valueOf(opponent.getStats().hp));
+        OpponentPokemonHpText.setText(String.valueOf(opponent.getHp()));
         AnchorPane.setTopAnchor(OpponentPokemonHpText, 50.0);
         AnchorPane.setLeftAnchor(OpponentPokemonHpText, 60.0);
 
@@ -118,28 +117,28 @@ public class FxmlBattleSceneController implements Initializable {
         AnchorPane.setTopAnchor(MyPokemonHpProgressBar, 39.0);
         AnchorPane.setLeftAnchor(MyPokemonHpProgressBar, 1.0);
 
-        if(trainer.getPartyPokemons().get(0).getMoves().size() > 0) {
-            Move1Button.setText(trainer.getPartyPokemons().get(0).getMoves().get(0).getDisplayName());
+        if(trainer.getPartyPokemons().get(0).getMove1() != null) {
+            Move1Button.setText(trainer.getPartyPokemons().get(0).getMove1().getDisplayName());
             Move1Button.setOnAction(event -> {
-                opponent.hurt(trainer.getOwnedPokemons().get(0), trainer.getOwnedPokemons().get(0).getMoves().get(0));
+                opponent.hurt(trainer.getOwnedPokemons().get(0), trainer.getOwnedPokemons().get(0).getMove1());
             });
         }
-        if(trainer.getPartyPokemons().get(0).getMoves().size() > 1) {
-            Move2Button.setText(trainer.getPartyPokemons().get(0).getMoves().get(1).getDisplayName());
+        if(trainer.getPartyPokemons().get(0).getMove2() != null) {
+            Move2Button.setText(trainer.getPartyPokemons().get(0).getMove2().getDisplayName());
             Move2Button.setOnAction(event -> {
-                opponent.hurt(trainer.getOwnedPokemons().get(0), trainer.getOwnedPokemons().get(0).getMoves().get(1));
+                opponent.hurt(trainer.getOwnedPokemons().get(0), trainer.getOwnedPokemons().get(0).getMove2());
             });
         }
-        if(trainer.getPartyPokemons().get(0).getMoves().size() > 2) {
-            Move3Button.setText(trainer.getPartyPokemons().get(0).getMoves().get(2).getDisplayName());
+        if(trainer.getPartyPokemons().get(0).getMove3() != null) {
+            Move3Button.setText(trainer.getPartyPokemons().get(0).getMove3().getDisplayName());
             Move3Button.setOnAction(event -> {
-                opponent.hurt(trainer.getOwnedPokemons().get(0), trainer.getOwnedPokemons().get(0).getMoves().get(2));
+                opponent.hurt(trainer.getOwnedPokemons().get(0), trainer.getOwnedPokemons().get(0).getMove3());
             });
         }
-        if(trainer.getPartyPokemons().get(0).getMoves().size() > 3) {
-            Move4Button.setText(trainer.getPartyPokemons().get(0).getMoves().get(3).getDisplayName());
+        if(trainer.getPartyPokemons().get(0).getMove4() != null) {
+            Move4Button.setText(trainer.getPartyPokemons().get(0).getMove4().getDisplayName());
             Move4Button.setOnAction(event -> {
-                opponent.hurt(trainer.getOwnedPokemons().get(0), trainer.getOwnedPokemons().get(0).getMoves().get(3));
+                opponent.hurt(trainer.getOwnedPokemons().get(0), trainer.getOwnedPokemons().get(0).getMove4());
             });
         }
 

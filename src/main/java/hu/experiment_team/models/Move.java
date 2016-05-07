@@ -1,9 +1,13 @@
 package hu.experiment_team.models;
 
+import javax.persistence.*;
+
 /**
  * This class contains information about the pokemon moves
  * @author Jakab Ádám
  * */
+@Entity
+@Table(name = "pokemon_moves")
 public class Move {
 
     /**
@@ -11,19 +15,23 @@ public class Move {
      * The ID number must be a whole number greater than 0 (i.e. 1,2,3...), up to 999.
      * Missing numbers are not a problem (e.g. the sequence 23,24,25,58,59,60... is allowed).
      * */
-    private final int Id;
+    @Id
+    @Column(name = "id")
+    private int Id;
 
     /**
      * The actual name of the move.
      * This is only used when displaying the move's name on the screen.
      * */
-    private final String displayName;
+    @Column(name = "displayName")
+    private String displayName;
 
     /**
      * The move's function code.
      * A function code is a 3-digit hexadecimal number that describes a defined effect (e.g. poisons the opponent).
      * */
-    private final String functionCode;
+    @Column(name = "functionCode")
+    private String functionCode;
 
     /**
      * The base amount of damage the move will inflict on the attack target.
@@ -31,12 +39,14 @@ public class Move {
      * Is 1 if the move calculates the base damage later (e.g. depending on the user's weight).
      * For multi-hit moves, this is the damage dealt per hit.
      * */
-    private final int baseDamage;
+    @Column(name = "baseDamage")
+    private int baseDamage;
 
     /**
      * The internal name of the move's elemental type.
      * */
-    private final String type;
+    @Column(name = "type")
+    private String type;
 
     /**
      * Is one of the following:
@@ -44,26 +54,30 @@ public class Move {
      *  - Special (calculates damage using Special Attack and Special Defense)
      *  - Status (inflicts no damage)
      * */
-    private final String moveCategory;
+    @Column(name = "moveCategory")
+    private String moveCategory;
 
     /**
      * The move's accuracy, out of 100.
      * Set to 0 if the move doesn't perform an accuracy check (i.e. it cannot be evaded).
      * */
-    private final int accuracy;
+    @Column(name = "accuracy")
+    private int accuracy;
 
     /**
      * The maximum amount of PP this move can have, not counting modifiers such as the item PP Up.
      * If this is 0, the move is infinite use.
      * */
-    private final int totalPP;
+    @Column(name = "totalPP")
+    private int totalPP;
 
     /**
      * The probability that the move's additional effect occurs, out of 100.
      * For example, Poison Sting poisons the opponent 30% of the time, so this value would be 30.
      * Set to 0 if this move does nothing other than its effect (e.g. for all status moves).
      * */
-    private final int additionalEffectChance;
+    @Column(name = "additionalEffectChance")
+    private int additionalEffectChance;
 
     /**
      * The order the move will be used in (overrides Speed calculations).
@@ -72,7 +86,8 @@ public class Move {
      * Moves with equal priority will be used depending on their user's Speed.
      * - For example, Quick Attack has a priority of 1.
      * */
-    private final int priority;
+    @Column(name = "priority")
+    private int priority;
 
     /**
      * Any combination of the following letters:
@@ -89,88 +104,141 @@ public class Move {
      *  - k - This is a sound-based move.
      *  - l - While Gravity is in effect, this move is disabled for all active Pokémon.
      * */
-    private final String flags;
+    @Column(name = "flags")
+    private String flags;
 
     /**
      * A move aktuális PP-je
      * */
+    @Transient
     private int actualPP;
 
     /**
-     * This class handles the constructor
-     * @author Jakab Ádám
+     * Empty constructor for JPA
      * */
-    public static class Builder {
-
-        // Required parameters
-        private int Id;
-        private int baseDamage;
-        private String type;
-        private String moveCategory;
-        private int accuracy;
-        private int totalPP;
-        private int additionalEffectChance;
-
-        // Optional parameters
-        private String displayName = "null";
-        private String functionCode = "null";
-        private int priority = 0;
-        private String flags = "null";
-
-        public Builder(int id, int baseDamage, String type, String moveCategory, int accuracy, int totalPP, int additionalEffectChance){
-            this.Id = id;
-            this.baseDamage = baseDamage;
-            this.type = type;
-            this.moveCategory = moveCategory;
-            this.accuracy = accuracy;
-            this.totalPP = totalPP;
-            this.additionalEffectChance = additionalEffectChance;
-        }
-
-        public Builder displayName(String val){ displayName = val; return this; }
-        public Builder functionCode(String val){ functionCode = val; return this; }
-        public Builder priority(int val){ priority = val; return this; }
-        public Builder flags(String val){ flags = val; return this; }
-        public Move build(){ return new Move(this); }
-
+    public Move(){
     }
 
-    private Move(Builder builder){
-        Id = builder.Id;
-        displayName = builder.displayName;
-        functionCode = builder.functionCode;
-        baseDamage = builder.baseDamage;
-        type = builder.type;
-        moveCategory = builder.moveCategory;
-        accuracy = builder.accuracy;
-        totalPP = builder.totalPP;
-        additionalEffectChance = builder.additionalEffectChance;
-        priority = builder.priority;
-        flags = builder.flags;
-        actualPP = builder.totalPP;
+    /**
+     * Getters and Setters
+     * */
+    public int getId() {
+        return Id;
     }
 
-    public int getId() { return Id; }
-    public String getDisplayName() { return displayName; }
-    public String getFunctionCode() { return functionCode; }
-    public int getBaseDamage() { return baseDamage; }
-    public String getType() { return type; }
-    public String getMoveCategory() { return moveCategory; }
-    public int getAccuracy() { return accuracy; }
-    public int getTotalPP() { return totalPP; }
-    public int getAdditionalEffectChance() { return additionalEffectChance; }
-    public int getPriority() { return priority; }
-    public String getFlags() { return flags; }
-    public int getActualPP() { return actualPP; }
+    public void setId(int id) {
+        Id = id;
+    }
 
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
+    public String getFunctionCode() {
+        return functionCode;
+    }
+
+    public void setFunctionCode(String functionCode) {
+        this.functionCode = functionCode;
+    }
+
+    public int getBaseDamage() {
+        return baseDamage;
+    }
+
+    public void setBaseDamage(int baseDamage) {
+        this.baseDamage = baseDamage;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getMoveCategory() {
+        return moveCategory;
+    }
+
+    public void setMoveCategory(String moveCategory) {
+        this.moveCategory = moveCategory;
+    }
+
+    public int getAccuracy() {
+        return accuracy;
+    }
+
+    public void setAccuracy(int accuracy) {
+        this.accuracy = accuracy;
+    }
+
+    public int getTotalPP() {
+        return totalPP;
+    }
+
+    public void setTotalPP(int totalPP) {
+        this.totalPP = totalPP;
+    }
+
+    public int getAdditionalEffectChance() {
+        return additionalEffectChance;
+    }
+
+    public void setAdditionalEffectChance(int additionalEffectChance) {
+        this.additionalEffectChance = additionalEffectChance;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+
+    public void setPriority(int priority) {
+        this.priority = priority;
+    }
+
+    public String getFlags() {
+        return flags;
+    }
+
+    public void setFlags(String flags) {
+        this.flags = flags;
+    }
+
+    public int getActualPP() {
+        return actualPP;
+    }
+
+    public void setActualPP(int actualPP) {
+        this.actualPP = actualPP;
+    }
+
+    /**
+     * If a pokemon used its move, the PP decreased by one.
+     * */
     public void usePP() { this.actualPP -= 1; }
 
     @Override
     public String toString() {
-        return "Name: " + displayName +
-                ", baseDamage: " + baseDamage +
-                ", type: '" + type + '\'' +
-                ", accuracy: " + accuracy;
+        return "Move{" +
+                "Id=" + Id +
+                ", displayName='" + displayName + '\'' +
+                ", functionCode='" + functionCode + '\'' +
+                ", baseDamage=" + baseDamage +
+                ", type='" + type + '\'' +
+                ", moveCategory='" + moveCategory + '\'' +
+                ", accuracy=" + accuracy +
+                ", totalPP=" + totalPP +
+                ", additionalEffectChance=" + additionalEffectChance +
+                ", priority=" + priority +
+                ", flags='" + flags + '\'' +
+                ", actualPP=" + actualPP +
+                '}';
     }
 
     @Override

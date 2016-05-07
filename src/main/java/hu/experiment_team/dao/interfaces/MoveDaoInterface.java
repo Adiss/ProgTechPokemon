@@ -1,7 +1,8 @@
 package hu.experiment_team.dao.interfaces;
 
 import hu.experiment_team.models.Move;
-import hu.experiment_team.models.OwnedPokemon;
+import hu.experiment_team.models.Pokemon;
+
 import java.util.List;
 
 /**
@@ -21,14 +22,7 @@ public interface MoveDaoInterface {
      * @param pokemonId A pokémon ID-je
      * @return A pokémon álltal ismert képességek listáját adja vissza
      * */
-    List<Integer> getKnownMove(int level, int pokemonId);
-
-    /**
-     * A pokémon álltal ismert képességekből ad vissza egyet véletlenszerűen.
-     * @param p A pokémon ID-je
-     * @return Egy random move
-     * */
-    Move getRandomKnownMove(OwnedPokemon p);
+    List<Move> getKnownMove(int level, int pokemonId);
 
     /**
      * Az adatbázisban található összes képességet lekérdezi egy listába.

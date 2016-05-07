@@ -2,8 +2,6 @@ package hu.experiment_team.controllers;
 
 import hu.experiment_team.UserMethods;
 import hu.experiment_team.models.Trainer;
-import javafx.application.Platform;
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

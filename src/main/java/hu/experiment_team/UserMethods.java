@@ -1,6 +1,7 @@
 package hu.experiment_team;
 
-import hu.experiment_team.dao.TrainerDao;
+import hu.experiment_team.dao.PokemonDAO;
+import hu.experiment_team.dao.PokemonDAO;
 import hu.experiment_team.models.Trainer;
 
 import java.io.UnsupportedEncodingException;
@@ -33,15 +34,22 @@ public enum UserMethods {
         List<String> errors = new ArrayList<>();
 
         if(!Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$").matcher(rEmail).matches()){ errors.add("Ez az email-cim nem valodi."); }
-        if(TrainerDao.INSTANCE.selectByEmail(rEmail) != null){ errors.add("Mar van felhasznalo ilyen e-mail cimmel."); }
-        if(TrainerDao.INSTANCE.selectByName(rUsername) != null){ errors.add("Mar van felhasznalo ilyen nevvel."); }
+        if(PokemonDAO.INSTANCE.selectTrainerByEmail(rEmail) != null){ errors.add("Mar van felhasznalo ilyen e-mail cimmel."); }
+        if(PokemonDAO.INSTANCE.selectTrainerByName(rUsername) != null){ errors.add("Mar van felhasznalo ilyen nevvel."); }
         if(!rPassword.equals(rPassword2)){ errors.add("A ket beirt jelszo nem egyezik meg."); }
         if(rUsername.length() < 2){ errors.add("A felhasznalonev tol rovid."); }
         if(rUsername.length() > 32){ errors.add("A felhasznalonev tol hosszu."); }
         if(rPassword.length() < 3){ errors.add("A jelszo tul rovid."); }
         if(rPassword.length() > 32){ errors.add("A jelszo tul hosszu."); }
         if(errors.isEmpty()){
-            TrainerDao.INSTANCE.insert(new Trainer.Builder(rUsername, displayName, SHA1(rUsername, rPassword), rEmail).build());
+            Trainer t = new Trainer();
+            t.setUsername(rUsername);
+            t.setPassword(SHA1(rUsername, rPassword));
+            t.setDisplayName(displayName);
+            t.setEmail(rEmail);
+            t.setMatchLoose(0);
+            t.setMatchWin(0);
+            PokemonDAO.INSTANCE.insertTrainer(t);
             errors.add("Sikeres regisztracio!");
             return errors;
         } else {
@@ -56,7 +64,7 @@ public enum UserMethods {
      * @return The user as Trainer object
      * */
     public Trainer login (String lUsername, String lPassword){
-        Trainer user = TrainerDao.INSTANCE.selectByPassword(SHA1(lUsername, lPassword));
+        Trainer user = PokemonDAO.INSTANCE.selectTrainerByPassword(SHA1(lUsername, lPassword));
         if(user != null)
             user.setOnline(1);
         return user;

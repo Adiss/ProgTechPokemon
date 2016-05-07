@@ -11,24 +11,24 @@ public interface TrainerDaoInterface {
      * Hozzáad egy trainert (felhasználót) az adatbázishoz.
      * @param trainer A trainer osztály egy példánya a megfelelő mezőkkel feltöltve.
      * */
-    void insert(Trainer trainer);
+    void insertTrainer(Trainer trainer);
     /**
      * Kiválaszt egy trainert (felhasználót) a neve alapján.
      * @param username A trainer felhasználó neve.
      * @return A trainer objektumát adja vissza
      * */
-    Trainer selectByName(String username);
+    Trainer selectTrainerByName(String username);
     /**
      * Kiválaszt egy trainert (felhasználót) a jelszava alapján.
      * Ennek a jelszónak már az SHA1 kódolt jelszónak kell lennie.
      * @param password SHA1 kódolt jelszó.
      * @return A trainer objektumát adja vissza
      * */
-    Trainer selectByPassword(String password);
+    Trainer selectTrainerByPassword(String password);
     /**
      * Kiválaszt egy trainert (felhasználót) az e-mail címe alapján.
      * @param email A trainer email címe.
      * @return A trainer objektumát adja vissza
      * */
-    Trainer selectByEmail(String email);
+    Trainer selectTrainerByEmail(String email);
 }

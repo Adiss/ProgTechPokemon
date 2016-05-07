@@ -1,6 +1,6 @@
 package hu.experiment_team.dao.interfaces;
 
-import hu.experiment_team.models.OwnedPokemon;
+import hu.experiment_team.models.Pokemon;
 
 import java.util.List;
 
@@ -14,24 +14,24 @@ public interface PokemonDaoInterface {
      * @param pokemonId a pokémon adatbázis beli ID-je
      * @return A pokémon objektumát adja vissza
      * */
-    OwnedPokemon getPokemonById(int pokemonId);
+    Pokemon getPokemonById(int pokemonId);
 
     /**
      * Kiválaszt egy random alap pokémont az adatbázisból.
      * @return Egy pokémon objektuma
      * */
-    OwnedPokemon getRandomPokemon(int level);
+    Pokemon getRandomPokemon(int level);
 
     /**
      * Hozzáad egy pokémont az egyik játékos gyűjteményéhez.
      * @param id A Trainer ID-ja
      * @param p Egy pokémon objektum amit hozzá kívánunk adni a gyűjteményhez
      * */
-    void addOwnedPokemon(int id, OwnedPokemon p);
+    void addOwnedPokemon(int id, Pokemon p);
 
     /**
      * Lekérdezi a felhasználó összes birtokolt pokémonját.
      * @param id a felhasználóhoz tartozó azonosító szám
      * */
-    List<OwnedPokemon> getOwnedPokemons(int id);
+    List<Pokemon> getOwnedPokemons(int id);
 }

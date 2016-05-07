@@ -163,13 +163,7 @@ public class FxmlAccountPanelController implements Initializable {
         partyPokemon1Image.setOnDragDropped(event -> {
             Dragboard db = event.getDragboard();
             boolean success = false;
-            if (db.hasImage() &&
-                    !partyPokemon2Image.getImage().equals(db.getImage()) &&
-                    !partyPokemon3Image.getImage().equals(db.getImage()) &&
-                    !partyPokemon4Image.getImage().equals(db.getImage()) &&
-                    !partyPokemon5Image.getImage().equals(db.getImage()) &&
-                    !partyPokemon6Image.getImage().equals(db.getImage())
-                    ) {
+            if (db.hasImage()) {
                 partyPokemon1Image.setImage(db.getImage());
                 partyPokemon1Image.setPreserveRatio(true);
                 partyPokemon1Image.setFitHeight(80);
@@ -212,13 +206,7 @@ public class FxmlAccountPanelController implements Initializable {
         partyPokemon2Image.setOnDragDropped(event -> {
             Dragboard db = event.getDragboard();
             boolean success = false;
-            if (db.hasImage() &&
-                    !partyPokemon1Image.getImage().equals(db.getImage()) &&
-                    !partyPokemon3Image.getImage().equals(db.getImage()) &&
-                    !partyPokemon4Image.getImage().equals(db.getImage()) &&
-                    !partyPokemon5Image.getImage().equals(db.getImage()) &&
-                    !partyPokemon6Image.getImage().equals(db.getImage())
-                    ) {
+            if (db.hasImage()) {
                 partyPokemon2Image.setImage(db.getImage());
                 partyPokemon2Image.setPreserveRatio(true);
                 partyPokemon2Image.setFitHeight(80);
@@ -261,13 +249,7 @@ public class FxmlAccountPanelController implements Initializable {
         partyPokemon3Image.setOnDragDropped(event -> {
             Dragboard db = event.getDragboard();
             boolean success = false;
-            if (db.hasImage() &&
-                    !partyPokemon1Image.getImage().equals(db.getImage()) &&
-                    !partyPokemon2Image.getImage().equals(db.getImage()) &&
-                    !partyPokemon4Image.getImage().equals(db.getImage()) &&
-                    !partyPokemon5Image.getImage().equals(db.getImage()) &&
-                    !partyPokemon6Image.getImage().equals(db.getImage())
-                    ) {
+            if (db.hasImage()) {
                 partyPokemon3Image.setImage(db.getImage());
                 partyPokemon3Image.setPreserveRatio(true);
                 partyPokemon3Image.setFitHeight(80);
@@ -310,13 +292,7 @@ public class FxmlAccountPanelController implements Initializable {
         partyPokemon4Image.setOnDragDropped(event -> {
             Dragboard db = event.getDragboard();
             boolean success = false;
-            if (db.hasImage() &&
-                    !partyPokemon1Image.getImage().equals(db.getImage()) &&
-                    !partyPokemon2Image.getImage().equals(db.getImage()) &&
-                    !partyPokemon3Image.getImage().equals(db.getImage()) &&
-                    !partyPokemon5Image.getImage().equals(db.getImage()) &&
-                    !partyPokemon6Image.getImage().equals(db.getImage())
-                    ) {
+            if (db.hasImage()) {
                 partyPokemon4Image.setImage(db.getImage());
                 partyPokemon4Image.setPreserveRatio(true);
                 partyPokemon4Image.setFitHeight(80);
@@ -359,13 +335,7 @@ public class FxmlAccountPanelController implements Initializable {
         partyPokemon5Image.setOnDragDropped(event -> {
             Dragboard db = event.getDragboard();
             boolean success = false;
-            if (db.hasImage() &&
-                    !partyPokemon1Image.getImage().equals(db.getImage()) &&
-                    !partyPokemon2Image.getImage().equals(db.getImage()) &&
-                    !partyPokemon3Image.getImage().equals(db.getImage()) &&
-                    !partyPokemon4Image.getImage().equals(db.getImage()) &&
-                    !partyPokemon6Image.getImage().equals(db.getImage())
-                    ) {
+            if (db.hasImage()) {
                 partyPokemon5Image.setImage(db.getImage());
                 partyPokemon5Image.setPreserveRatio(true);
                 partyPokemon5Image.setFitHeight(80);
@@ -408,13 +378,7 @@ public class FxmlAccountPanelController implements Initializable {
         partyPokemon6Image.setOnDragDropped(event -> {
             Dragboard db = event.getDragboard();
             boolean success = false;
-            if (db.hasImage() &&
-                    !partyPokemon1Image.getImage().equals(db.getImage()) &&
-                    !partyPokemon2Image.getImage().equals(db.getImage()) &&
-                    !partyPokemon3Image.getImage().equals(db.getImage()) &&
-                    !partyPokemon4Image.getImage().equals(db.getImage()) &&
-                    !partyPokemon5Image.getImage().equals(db.getImage())
-                    ) {
+            if (db.hasImage()) {
                 partyPokemon6Image.setImage(db.getImage());
                 partyPokemon6Image.setPreserveRatio(true);
                 partyPokemon6Image.setFitHeight(80);
