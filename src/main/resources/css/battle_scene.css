@@ -3,22 +3,35 @@
     -fx-pref-height: 450px;
 }
 
-.bottom-move-holder {
+.bottom-holder {
     -fx-pref-width: 700px;
     -fx-pref-height: 150px;
     -fx-background-image: url("../images/battle_bottom_bar_background.jpg");
     -fx-effect: dropshadow(three-pass-box, #000, 10, 0, 0, 0);
+    -fx-padding: 35px 65px 35px 55px;
+}
+
+.bottom-text-holder {
+    -fx-background-color: white;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, #000, 10, 0, 0, 0);
+    -fx-pref-width: 530px;
+    -fx-pref-height: 40px;
+    -fx-text-alignment: center;
+    -fx-padding: 15px;
+}
+
+.bottom-move-holder {
     -fx-tile-alignment: center;
     -fx-pref-tile-width: 130px;
-    -fx-pref-tile-height: 60px;
-    -fx-padding: 45px 50px 45px 55px;
+    -fx-pref-tile-height: 30px;
     -fx-hgap: 20px;
 }
 
 .button {
     -fx-background-color: white;
     -fx-pref-width: 130px;
-    -fx-pref-height: 60px;
+    -fx-pref-height: 30px;
     -fx-font-family: "Power Clear";
     -fx-effect: dropshadow(three-pass-box, #000, 10, 0, 0, 0);
 }

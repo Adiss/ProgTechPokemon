@@ -54,6 +54,8 @@ public class FxmlBattleSceneController implements Initializable {
     public Button Move3Button;
     @FXML
     public Button Move4Button;
+    @FXML
+    public Text battle_textfield;
 
 
     private Trainer trainer;
@@ -129,26 +131,32 @@ public class FxmlBattleSceneController implements Initializable {
             Move1Button.setText(trainer.getPartyPokemons().get(0).getMove1().getDisplayName());
             Move1Button.setOnAction(event -> {
                 opponent.hurt(trainer.getOwnedPokemons().get(0), trainer.getOwnedPokemons().get(0).getMove1());
+                battle_textfield.setText(trainer.getPartyPokemons().get(0).getDisplayName().toUpperCase() + " used " + trainer.getPartyPokemons().get(0).getMove1().getDisplayName().toUpperCase() + "!");
             });
         }
         if(trainer.getPartyPokemons().get(0).getMove2() != null) {
             Move2Button.setText(trainer.getPartyPokemons().get(0).getMove2().getDisplayName());
             Move2Button.setOnAction(event -> {
                 opponent.hurt(trainer.getOwnedPokemons().get(0), trainer.getOwnedPokemons().get(0).getMove2());
+                battle_textfield.setText(trainer.getPartyPokemons().get(0).getDisplayName().toUpperCase() + " used " + trainer.getPartyPokemons().get(0).getMove2().getDisplayName().toUpperCase() + "!");
             });
         }
         if(trainer.getPartyPokemons().get(0).getMove3() != null) {
             Move3Button.setText(trainer.getPartyPokemons().get(0).getMove3().getDisplayName());
             Move3Button.setOnAction(event -> {
                 opponent.hurt(trainer.getOwnedPokemons().get(0), trainer.getOwnedPokemons().get(0).getMove3());
+                battle_textfield.setText(trainer.getPartyPokemons().get(0).getDisplayName().toUpperCase() + " used " + trainer.getPartyPokemons().get(0).getMove3().getDisplayName().toUpperCase() + "!");
             });
         }
         if(trainer.getPartyPokemons().get(0).getMove4() != null) {
             Move4Button.setText(trainer.getPartyPokemons().get(0).getMove4().getDisplayName());
             Move4Button.setOnAction(event -> {
                 opponent.hurt(trainer.getOwnedPokemons().get(0), trainer.getOwnedPokemons().get(0).getMove4());
+                battle_textfield.setText(trainer.getPartyPokemons().get(0).getDisplayName().toUpperCase() + " used " + trainer.getPartyPokemons().get(0).getMove4().getDisplayName().toUpperCase() + "!");
             });
         }
+
+        battle_textfield.setText("A wild " + opponent.getDisplayName().toUpperCase() + " has appeared! Use your " + trainer.getPartyPokemons().get(0).getDisplayName().toUpperCase() + "'s spells to make it faint!");
 
     }
 

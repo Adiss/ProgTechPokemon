@@ -9,6 +9,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
 <BorderPane stylesheets="@../css/battle_scene.css" xmlns:fx="http://javafx.com/fxml">
     <top>
         <AnchorPane fx:id="top_battle_scene_holder" styleClass="top-battle-scene-holder">
@@ -27,11 +28,20 @@
         </AnchorPane>
     </top>
     <bottom>
-        <TilePane styleClass="bottom-move-holder">
-            <Button fx:id="Move1Button" styleClass="button"/>
-            <Button fx:id="Move2Button" styleClass="button"/>
-            <Button fx:id="Move3Button" styleClass="button"/>
-            <Button fx:id="Move4Button" styleClass="button"/>
-        </TilePane>
+        <BorderPane styleClass="bottom-holder">
+            <top>
+                <HBox styleClass="bottom-text-holder">
+                    <Text fx:id="battle_textfield" styleClass="hp_panel_text"/>
+                </HBox>
+            </top>
+            <bottom>
+                <TilePane styleClass="bottom-move-holder">
+                    <Button fx:id="Move1Button" styleClass="button"/>
+                    <Button fx:id="Move2Button" styleClass="button"/>
+                    <Button fx:id="Move3Button" styleClass="button"/>
+                    <Button fx:id="Move4Button" styleClass="button"/>
+                </TilePane>
+            </bottom>
+        </BorderPane>
     </bottom>
 </BorderPane>
