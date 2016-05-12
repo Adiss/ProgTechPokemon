@@ -7,6 +7,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * This model contains the trainer.
@@ -181,7 +182,6 @@ public class Trainer {
      * @param p A pokémon objektuma
      * */
     public void addPokemon(Pokemon p){ PokemonDAO.INSTANCE.addOwnedPokemon(this.id, p); }
-
 
     @Override
     public String toString() {

@@ -11,6 +11,7 @@ import hu.experiment_team.models.Trainer;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -86,6 +87,60 @@ public enum PokemonDAO implements MoveDaoInterface, PokemonDaoInterface, Trainer
     public Trainer selectTrainerByEmail(String email){
         Trainer t = entityManager.createQuery("SELECT t FROM Trainer t WHERE t.email = '" + email + "'", Trainer.class).getSingleResult();
         t.setOwnedPokemons(getOwnedPokemons(t.getId()));
+        return t;
+    }
+
+    /**
+     * Visszaad egy Random trainert random pokemonokkal a party slotjaiban.
+     * @param pokemonLevel Megadja, hogy a partyban milyen szintu pokemonok legyenek.
+     * */
+    public Trainer createRandomTrainer(int pokemonLevel){
+        Trainer t = new Trainer();
+        Random r = new Random();
+        StringBuilder sb = new StringBuilder();
+
+        List<String> firstName = new ArrayList<String>(){{
+            add("Biker");
+            add("Boss");
+            add("Champion");
+            add("Engineer");
+            add("Hiker");
+            add("Leader");
+            add("Rival");
+            add("Rocker");
+            add("Rocker");
+            add("Scientist");
+            add("Swimmer");
+            add("Youngster");
+            add("Chief");
+        }};
+
+        List<String> lastName = new ArrayList<String>(){{
+            add("Charles");
+            add("Dwayne");
+            add("Glenn");
+            add("Harris");
+            add("Joel");
+            add("Zeke");
+            add("Adam");
+            add("Lexii");
+            add("Victor");
+            add("Mark");
+        }};
+
+        List<Pokemon> party = new ArrayList<Pokemon>(){{
+            add(PokemonDAO.INSTANCE.getRandomPokemon(pokemonLevel));
+            add(PokemonDAO.INSTANCE.getRandomPokemon(pokemonLevel));
+            add(PokemonDAO.INSTANCE.getRandomPokemon(pokemonLevel));
+            add(PokemonDAO.INSTANCE.getRandomPokemon(pokemonLevel));
+            add(PokemonDAO.INSTANCE.getRandomPokemon(pokemonLevel));
+            add(PokemonDAO.INSTANCE.getRandomPokemon(pokemonLevel));
+        }};
+
+        t.setId(99999);
+        t.setDisplayName(sb.append(firstName.get(r.nextInt(12)+1)).append(" ").append(lastName.get(r.nextInt(9)+1)).toString());
+        t.setPartyPokemons(party);
+
         return t;
     }
 

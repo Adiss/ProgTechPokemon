@@ -60,7 +60,7 @@ public enum Effectiveness {
         // FIGHTING
         typeEffectiveness.put("FIGHTINGNORMAL", 2.0);typeEffectiveness.put("FIGHTINGFIRE", 1.0);typeEffectiveness.put("FIGHTINGWATER", 1.0);typeEffectiveness.put("FIGHTINGELECTRIC", 1.0);
         typeEffectiveness.put("FIGHTINGGRASS", 1.0);typeEffectiveness.put("FIGHTINGICE", 2.0);typeEffectiveness.put("FIGHTINGFIGHTING", 1.0);typeEffectiveness.put("FIGHTINGPOISON", 0.5);
-        typeEffectiveness.put("FIGHTINGGROUND", 1.0);typeEffectiveness.put("FIGHTINGFLYFIGHTING", 0.5);typeEffectiveness.put("FIGHTINGPSYCHIC", 0.5);typeEffectiveness.put("FIGHTINGBUG", 0.5);
+        typeEffectiveness.put("FIGHTINGGROUND", 1.0);typeEffectiveness.put("FIGHTINGFLYING", 0.5);typeEffectiveness.put("FIGHTINGPSYCHIC", 0.5);typeEffectiveness.put("FIGHTINGBUG", 0.5);
         typeEffectiveness.put("FIGHTINGROCK", 2.0);typeEffectiveness.put("FIGHTINGGHOST", 0.0);typeEffectiveness.put("FIGHTINGDRAGON", 1.0);typeEffectiveness.put("FIGHTINGDARK", 2.0);
         typeEffectiveness.put("FIGHTINGSTEEL", 2.0);typeEffectiveness.put("FIGHTINGFAIRY", 0.5);
         // POISON
@@ -72,12 +72,12 @@ public enum Effectiveness {
         // GROUND
         typeEffectiveness.put("GROUNDNORMAL", 1.0);typeEffectiveness.put("GROUNDFIRE", 2.0);typeEffectiveness.put("GROUNDWATER", 1.0);typeEffectiveness.put("GROUNDELECTRIC", 2.0);
         typeEffectiveness.put("GROUNDGRASS", 0.5);typeEffectiveness.put("GROUNDICE", 1.0);typeEffectiveness.put("GROUNDFIGHTING", 1.0);typeEffectiveness.put("GROUNDPOISON", 2.0);
-        typeEffectiveness.put("GROUNDGROUND", 1.0);typeEffectiveness.put("GROUNDFLYFIGHTING", 0.0);typeEffectiveness.put("GROUNDPSYCHIC", 1.0);typeEffectiveness.put("GROUNDBUG", 0.5);
+        typeEffectiveness.put("GROUNDGROUND", 1.0);typeEffectiveness.put("GROUNDFLYING", 0.0);typeEffectiveness.put("GROUNDPSYCHIC", 1.0);typeEffectiveness.put("GROUNDBUG", 0.5);
         typeEffectiveness.put("GROUNDROCK", 2.0);typeEffectiveness.put("GROUNDGHOST", 1.0);typeEffectiveness.put("GROUNDDRAGON", 1.0);typeEffectiveness.put("GROUNDDARK", 1.0);
         typeEffectiveness.put("GROUNDSTEEL", 2.0);typeEffectiveness.put("GROUNDFAIRY", 1.0);
         // FLYING
         typeEffectiveness.put("FLYINGNORMAL", 1.0);typeEffectiveness.put("FLYINGFIRE", 1.0);typeEffectiveness.put("FLYINGWATER", 1.0);typeEffectiveness.put("FLYINGELECTRIC", 0.5);
-        typeEffectiveness.put("FLYINGGRASS", 2.0);typeEffectiveness.put("FLYINGICE", 1.0);typeEffectiveness.put("FLYINGFIGHTING", 2.0);typeEffectiveness.put("FLYFIGHTINGPOISON", 2.0);
+        typeEffectiveness.put("FLYINGGRASS", 2.0);typeEffectiveness.put("FLYINGICE", 1.0);typeEffectiveness.put("FLYINGFIGHTING", 2.0);typeEffectiveness.put("FLYINGPOISON", 2.0);
         typeEffectiveness.put("FLYINGGROUND", 1.0);typeEffectiveness.put("FLYINGFLYING", 1.0);typeEffectiveness.put("FLYINGPSYCHIC", 1.0);typeEffectiveness.put("FLYINGBUG", 2.0);
         typeEffectiveness.put("FLYINGROCK", 0.5);typeEffectiveness.put("FLYINGGHOST", 1.0);typeEffectiveness.put("FLYINGDRAGON", 1.0);typeEffectiveness.put("FLYINGDARK", 1.0);
         typeEffectiveness.put("FLYINGSTEEL", 0.5);typeEffectiveness.put("FLYINGFAIRY", 1.0);
@@ -114,7 +114,7 @@ public enum Effectiveness {
         // DARK
         typeEffectiveness.put("DARKNORMAL", 1.0);typeEffectiveness.put("DARKFIRE", 1.0);typeEffectiveness.put("DARKWATER", 1.0);typeEffectiveness.put("DARKELECTRIC", 1.0);
         typeEffectiveness.put("DARKGRASS", 1.0);typeEffectiveness.put("DARKICE", 1.0);typeEffectiveness.put("DARKFIGHTING", 0.5);typeEffectiveness.put("DARKPOISON", 1.0);
-        typeEffectiveness.put("DARKGROUND", 1.0);typeEffectiveness.put("DARKFLYFIGHTING", 1.0);typeEffectiveness.put("DARKPSYCHIC", 2.0);typeEffectiveness.put("DARKBUG", 1.0);
+        typeEffectiveness.put("DARKGROUND", 1.0);typeEffectiveness.put("DARKFLYING", 1.0);typeEffectiveness.put("DARKPSYCHIC", 2.0);typeEffectiveness.put("DARKBUG", 1.0);
         typeEffectiveness.put("DARKROCK", 1.0);typeEffectiveness.put("DARKGHOST", 2.0);typeEffectiveness.put("DARKDRAGON", 1.0);typeEffectiveness.put("DARKDARK", 0.5);
         typeEffectiveness.put("DARKSTEEL", 1.0);typeEffectiveness.put("DARKFAIRY", 0.5);
         // STEEL

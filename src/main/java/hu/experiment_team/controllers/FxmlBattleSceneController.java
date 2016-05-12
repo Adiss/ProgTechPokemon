@@ -59,21 +59,21 @@ public class FxmlBattleSceneController implements Initializable {
 
 
     private Trainer trainer;
-    private Pokemon opponent;
+    private Trainer opponent;
     private Random r;
 
     private int rand;
 
     private ChangeListener OpponentPokemonHpchangeListener = (observableValue, oldValue, newValue) -> {
-        double oldV = opponent.getClonedOne().getHp();
+        double oldV = opponent.getPartyPokemons().get(0).getClonedOne().getHp();
         double newV = (int)newValue;
         OpponentPokemonHpProgressBar.progressProperty().set(newV / oldV);
     };
 
     public FxmlBattleSceneController(Trainer t) {
         this.trainer = t;
-        this.opponent = PokemonDAO.INSTANCE.getRandomPokemon(t.getPartyPokemons().get(0).getLevel());
-        opponent.gethpProperty().addListener(OpponentPokemonHpchangeListener);
+        this.opponent = PokemonDAO.INSTANCE.createRandomTrainer(t.getPartyPokemons().get(0).getLevel());
+        opponent.getPartyPokemons().get(0).gethpProperty().addListener(OpponentPokemonHpchangeListener);
         this.r = new Random();
     }
 
@@ -96,7 +96,7 @@ public class FxmlBattleSceneController implements Initializable {
         AnchorPane.setLeftAnchor(myPokemonImage, 0.0);
         AnchorPane.setBottomAnchor(myPokemonImage, 0.0);
 
-        opponentPokemonImage.setImage(PokemonUtils.INSTANCE.getPokemonImage(opponent.getId()));
+        opponentPokemonImage.setImage(PokemonUtils.INSTANCE.getPokemonImage(opponent.getPartyPokemons().get(0).getId()));
         AnchorPane.setRightAnchor(opponentPokemonImage, 60.0);
         AnchorPane.setTopAnchor(opponentPokemonImage, 150.0);
 
@@ -113,10 +113,10 @@ public class FxmlBattleSceneController implements Initializable {
         AnchorPane.setTopAnchor(MyPokemonHpText, 50.0);
         AnchorPane.setLeftAnchor(MyPokemonHpText, 60.0);
 
-        OpponentPokemonName.setText(opponent.getDisplayName());
+        OpponentPokemonName.setText(opponent.getPartyPokemons().get(0).getDisplayName());
         AnchorPane.setTopAnchor(OpponentPokemonName, 15.0);
         AnchorPane.setLeftAnchor(OpponentPokemonName, 10.0);
-        OpponentPokemonHpText.setText(String.valueOf(opponent.getHp()));
+        OpponentPokemonHpText.setText(String.valueOf(opponent.getPartyPokemons().get(0).getHp()));
         AnchorPane.setTopAnchor(OpponentPokemonHpText, 50.0);
         AnchorPane.setLeftAnchor(OpponentPokemonHpText, 60.0);
 
@@ -130,33 +130,33 @@ public class FxmlBattleSceneController implements Initializable {
         if(trainer.getPartyPokemons().get(0).getMove1() != null) {
             Move1Button.setText(trainer.getPartyPokemons().get(0).getMove1().getDisplayName());
             Move1Button.setOnAction(event -> {
-                opponent.hurt(trainer.getOwnedPokemons().get(0), trainer.getOwnedPokemons().get(0).getMove1());
+                opponent.getPartyPokemons().get(0).hurt(trainer.getOwnedPokemons().get(0), trainer.getOwnedPokemons().get(0).getMove1());
                 battle_textfield.setText(trainer.getPartyPokemons().get(0).getDisplayName().toUpperCase() + " used " + trainer.getPartyPokemons().get(0).getMove1().getDisplayName().toUpperCase() + "!");
             });
         }
         if(trainer.getPartyPokemons().get(0).getMove2() != null) {
             Move2Button.setText(trainer.getPartyPokemons().get(0).getMove2().getDisplayName());
             Move2Button.setOnAction(event -> {
-                opponent.hurt(trainer.getOwnedPokemons().get(0), trainer.getOwnedPokemons().get(0).getMove2());
+                opponent.getPartyPokemons().get(0).hurt(trainer.getOwnedPokemons().get(0), trainer.getOwnedPokemons().get(0).getMove2());
                 battle_textfield.setText(trainer.getPartyPokemons().get(0).getDisplayName().toUpperCase() + " used " + trainer.getPartyPokemons().get(0).getMove2().getDisplayName().toUpperCase() + "!");
             });
         }
         if(trainer.getPartyPokemons().get(0).getMove3() != null) {
             Move3Button.setText(trainer.getPartyPokemons().get(0).getMove3().getDisplayName());
             Move3Button.setOnAction(event -> {
-                opponent.hurt(trainer.getOwnedPokemons().get(0), trainer.getOwnedPokemons().get(0).getMove3());
+                opponent.getPartyPokemons().get(0).hurt(trainer.getOwnedPokemons().get(0), trainer.getOwnedPokemons().get(0).getMove3());
                 battle_textfield.setText(trainer.getPartyPokemons().get(0).getDisplayName().toUpperCase() + " used " + trainer.getPartyPokemons().get(0).getMove3().getDisplayName().toUpperCase() + "!");
             });
         }
         if(trainer.getPartyPokemons().get(0).getMove4() != null) {
             Move4Button.setText(trainer.getPartyPokemons().get(0).getMove4().getDisplayName());
             Move4Button.setOnAction(event -> {
-                opponent.hurt(trainer.getOwnedPokemons().get(0), trainer.getOwnedPokemons().get(0).getMove4());
+                opponent.getPartyPokemons().get(0).hurt(trainer.getOwnedPokemons().get(0), trainer.getOwnedPokemons().get(0).getMove4());
                 battle_textfield.setText(trainer.getPartyPokemons().get(0).getDisplayName().toUpperCase() + " used " + trainer.getPartyPokemons().get(0).getMove4().getDisplayName().toUpperCase() + "!");
             });
         }
 
-        battle_textfield.setText("A wild " + opponent.getDisplayName().toUpperCase() + " has appeared! Use your " + trainer.getPartyPokemons().get(0).getDisplayName().toUpperCase() + "'s spells to make it faint!");
+        battle_textfield.setText(opponent.getDisplayName().toUpperCase() + " has challenged you to a battle with " + opponent.getPartyPokemons().get(0).getDisplayName().toUpperCase() + "! Use your " + trainer.getPartyPokemons().get(0).getDisplayName().toUpperCase() + "'s abilities to win!");
 
     }
 
