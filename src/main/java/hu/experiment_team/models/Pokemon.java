@@ -248,7 +248,7 @@ public class Pokemon implements Cloneable {
                     countSelected++;
                 }
             }
-            if(countSelected == 0 && m.getMoveCategory().equals("Physical"))
+            if(countSelected == 0 && (m.getMoveCategory().equals("Physical") || m.getMoveCategory().equals("Special")))
                 d.setHp(d.getHp() - damage);
         } catch (IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();

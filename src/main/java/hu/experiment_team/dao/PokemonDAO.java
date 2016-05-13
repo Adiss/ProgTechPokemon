@@ -66,6 +66,9 @@ public enum PokemonDAO implements MoveDaoInterface, PokemonDaoInterface, Trainer
     public Trainer selectTrainerByName(String username){
         Trainer t = entityManager.createQuery("SELECT t FROM Trainer t WHERE t.username = '" + username + "'", Trainer.class).getSingleResult();
         t.setOwnedPokemons(getOwnedPokemons(t.getId()));
+        for(int i = 0; i < t.getOwnedPokemons().size(); i++){
+            t.getOwnedPokemons().get(i).setClonedOne();
+        }
         return t;
     }
 
@@ -77,6 +80,9 @@ public enum PokemonDAO implements MoveDaoInterface, PokemonDaoInterface, Trainer
     public Trainer selectTrainerByPassword(String pass){
         Trainer t = entityManager.createQuery("SELECT t FROM Trainer t WHERE t.password = '" + pass + "'", Trainer.class).getSingleResult();
         t.setOwnedPokemons(getOwnedPokemons(t.getId()));
+        for(int i = 0; i < t.getOwnedPokemons().size(); i++){
+            t.getOwnedPokemons().get(i).setClonedOne();
+        }
         return t;
     }
 
@@ -87,6 +93,9 @@ public enum PokemonDAO implements MoveDaoInterface, PokemonDaoInterface, Trainer
     public Trainer selectTrainerByEmail(String email){
         Trainer t = entityManager.createQuery("SELECT t FROM Trainer t WHERE t.email = '" + email + "'", Trainer.class).getSingleResult();
         t.setOwnedPokemons(getOwnedPokemons(t.getId()));
+        for(int i = 0; i < t.getOwnedPokemons().size(); i++){
+            t.getOwnedPokemons().get(i).setClonedOne();
+        }
         return t;
     }
 
@@ -129,12 +138,12 @@ public enum PokemonDAO implements MoveDaoInterface, PokemonDaoInterface, Trainer
         }};
 
         List<Pokemon> party = new ArrayList<Pokemon>(){{
-            add(PokemonDAO.INSTANCE.getRandomPokemon(pokemonLevel));
-            add(PokemonDAO.INSTANCE.getRandomPokemon(pokemonLevel));
-            add(PokemonDAO.INSTANCE.getRandomPokemon(pokemonLevel));
-            add(PokemonDAO.INSTANCE.getRandomPokemon(pokemonLevel));
-            add(PokemonDAO.INSTANCE.getRandomPokemon(pokemonLevel));
-            add(PokemonDAO.INSTANCE.getRandomPokemon(pokemonLevel));
+            add(getRandomPokemon(pokemonLevel));
+            add(getRandomPokemon(pokemonLevel));
+            add(getRandomPokemon(pokemonLevel));
+            add(getRandomPokemon(pokemonLevel));
+            add(getRandomPokemon(pokemonLevel));
+            add(getRandomPokemon(pokemonLevel));
         }};
 
         t.setId(99999);
