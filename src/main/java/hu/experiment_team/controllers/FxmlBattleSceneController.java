@@ -107,6 +107,7 @@ public class FxmlBattleSceneController implements Initializable {
     };
 
     private ChangeListener turnListener = (observableValue, oldValue, newValue) -> {
+        // TODO -> A pokemon kiesése utáni pokémon azonnal sebez! Ez így nem fain.
         System.out.println(newValue);
         if((int)newValue % 2 == 0 && opponent.getPartyPokemons().get(opponentsCurrentPokemon).getHp() > 0){
             doOpponentPokemonsAttack();
