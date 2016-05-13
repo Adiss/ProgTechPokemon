@@ -194,12 +194,13 @@ public class FxmlBattleSceneController implements Initializable {
 
         System.out.println(opponentsCurrentPokemon);
 
-        if(opponentsCurrentPokemon > 5) {
+        if(opponentsCurrentPokemon == 5) {
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Congratulations!");
             alert.setHeaderText("You have won the match!");
             alert.setContentText("");
+            alert.show();
 
         } else {
 
