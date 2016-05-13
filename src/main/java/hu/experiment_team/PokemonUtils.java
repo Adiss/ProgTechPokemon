@@ -3,6 +3,8 @@ package hu.experiment_team;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.util.Random;
+
 /**
  * Created by Jakab on 2016.04.03..
  */
@@ -52,6 +54,11 @@ public enum PokemonUtils {
             pokemonImage = new Image("/images/battlers/" + String.valueOf(id) + "b.gif");
 
         return pokemonImage;
+    }
+
+    public Image getRandomTrainerImage(){
+        Random r = new Random();
+        return new Image("/images/trainers/" + r.nextInt(8) + ".png");
     }
 
 }
