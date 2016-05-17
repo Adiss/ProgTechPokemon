@@ -206,7 +206,12 @@ public class Pokemon implements Cloneable {
 
             // Count damage
             int damage;
-            double STAB = attacker.getType1().equals(move.getType()) || attacker.getType2().equals(move.getType()) ? 1.5 : 1.0;
+            double STAB = 1;
+            if(attacker.getType2() != null){
+                STAB = attacker.getType1().equals(move.getType()) || attacker.getType2().equals(move.getType()) ? 1.5 : 1.0;
+            } else {
+                STAB = attacker.getType1().equals(move.getType()) ? 1.5 : 1.0;
+            }
             double typeEffectiveness = Effectiveness.INSTANCE.get(move.getType(), this.getType1())*10;
             Random r = new Random();
             double rand = 0.85 + (1.0-0.85) * r.nextDouble();

@@ -218,11 +218,6 @@ public class Move {
         this.actualPP = actualPP;
     }
 
-    /**
-     * If a pokemon used its move, the PP decreased by one.
-     * */
-    public void usePP() { this.actualPP -= 1; }
-
     @Override
     public String toString() {
         return "Move{" +
