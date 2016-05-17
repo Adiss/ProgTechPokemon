@@ -109,7 +109,7 @@ public class FxmlBattleSceneController implements Initializable {
     private ChangeListener turnListener = (observableValue, oldValue, newValue) -> {
         // TODO -> A pokemon kiesése utáni pokémon azonnal sebez! Ez így nem fain.
         System.out.println(newValue);
-        if((int)newValue % 2 == 0 && opponent.getPartyPokemons().get(opponentsCurrentPokemon).getHp() > 0){
+        if((int)newValue % 2 == 0){
             doOpponentPokemonsAttack();
         }
     };
@@ -193,9 +193,9 @@ public class FxmlBattleSceneController implements Initializable {
         if(trainer.getPartyPokemons().get(myCurrentPokemon).getMove1() != null) {
             Move1Button.setText(trainer.getPartyPokemons().get(myCurrentPokemon).getMove1().getDisplayName());
             Move1Button.setOnAction(event -> {
+                turn.setValue(turn.getValue() + 1);
                 opponent.getPartyPokemons().get(opponentsCurrentPokemon).hurt(trainer.getPartyPokemons().get(myCurrentPokemon), trainer.getPartyPokemons().get(myCurrentPokemon).getMove1());
                 battle_textfield.setText(trainer.getPartyPokemons().get(myCurrentPokemon).getDisplayName().toUpperCase() + " used " + trainer.getPartyPokemons().get(myCurrentPokemon).getMove1().getDisplayName().toUpperCase() + "!");
-                turn.setValue(turn.getValue() + 1);
             });
         } else {
             Move1Button.setText("");
@@ -205,9 +205,9 @@ public class FxmlBattleSceneController implements Initializable {
         if(trainer.getPartyPokemons().get(myCurrentPokemon).getMove2() != null) {
             Move2Button.setText(trainer.getPartyPokemons().get(myCurrentPokemon).getMove2().getDisplayName());
             Move2Button.setOnAction(event -> {
+                turn.setValue(turn.getValue() + 1);
                 opponent.getPartyPokemons().get(opponentsCurrentPokemon).hurt(trainer.getPartyPokemons().get(myCurrentPokemon), trainer.getPartyPokemons().get(myCurrentPokemon).getMove2());
                 battle_textfield.setText(trainer.getPartyPokemons().get(myCurrentPokemon).getDisplayName().toUpperCase() + " used " + trainer.getPartyPokemons().get(myCurrentPokemon).getMove2().getDisplayName().toUpperCase() + "!");
-                turn.setValue(turn.getValue() + 1);
             });
         } else {
             Move2Button.setText("");
@@ -217,9 +217,9 @@ public class FxmlBattleSceneController implements Initializable {
         if(trainer.getPartyPokemons().get(myCurrentPokemon).getMove3() != null) {
             Move3Button.setText(trainer.getPartyPokemons().get(myCurrentPokemon).getMove3().getDisplayName());
             Move3Button.setOnAction(event -> {
+                turn.setValue(turn.getValue() + 1);
                 opponent.getPartyPokemons().get(opponentsCurrentPokemon).hurt(trainer.getPartyPokemons().get(myCurrentPokemon), trainer.getPartyPokemons().get(myCurrentPokemon).getMove3());
                 battle_textfield.setText(trainer.getPartyPokemons().get(myCurrentPokemon).getDisplayName().toUpperCase() + " used " + trainer.getPartyPokemons().get(myCurrentPokemon).getMove3().getDisplayName().toUpperCase() + "!");
-                turn.setValue(turn.getValue() + 1);
             });
         } else {
             Move3Button.setText("");
@@ -229,9 +229,9 @@ public class FxmlBattleSceneController implements Initializable {
         if(trainer.getPartyPokemons().get(myCurrentPokemon).getMove4() != null) {
             Move4Button.setText(trainer.getPartyPokemons().get(myCurrentPokemon).getMove4().getDisplayName());
             Move4Button.setOnAction(event -> {
+                turn.setValue(turn.getValue() + 1);
                 opponent.getPartyPokemons().get(opponentsCurrentPokemon).hurt(trainer.getPartyPokemons().get(myCurrentPokemon), trainer.getPartyPokemons().get(myCurrentPokemon).getMove4());
                 battle_textfield.setText(trainer.getPartyPokemons().get(myCurrentPokemon).getDisplayName().toUpperCase() + " used " + trainer.getPartyPokemons().get(myCurrentPokemon).getMove4().getDisplayName().toUpperCase() + "!");
-                turn.setValue(turn.getValue() + 1);
             });
         } else {
             Move4Button.setText("");
@@ -428,9 +428,9 @@ public class FxmlBattleSceneController implements Initializable {
                     Move1Button.setText(trainer.getPartyPokemons().get(myCurrentPokemon).getMove1().getDisplayName());
                     Move1Button.setDisable(false);
                     Move1Button.setOnAction(onEvent -> {
+                        turn.setValue(turn.getValue() + 1);
                         opponent.getPartyPokemons().get(opponentsCurrentPokemon).hurt(trainer.getPartyPokemons().get(myCurrentPokemon), trainer.getPartyPokemons().get(myCurrentPokemon).getMove1());
                         battle_textfield.setText(trainer.getPartyPokemons().get(myCurrentPokemon).getDisplayName().toUpperCase() + " used " + trainer.getPartyPokemons().get(myCurrentPokemon).getMove1().getDisplayName().toUpperCase() + "!");
-                        turn.setValue(turn.getValue() + 1);
                     });
                 } else {
                     Move1Button.setText("");
@@ -441,9 +441,9 @@ public class FxmlBattleSceneController implements Initializable {
                     Move2Button.setText(trainer.getPartyPokemons().get(myCurrentPokemon).getMove2().getDisplayName());
                     Move2Button.setDisable(false);
                     Move2Button.setOnAction(onEvent -> {
+                        turn.setValue(turn.getValue() + 1);
                         opponent.getPartyPokemons().get(opponentsCurrentPokemon).hurt(trainer.getPartyPokemons().get(myCurrentPokemon), trainer.getPartyPokemons().get(myCurrentPokemon).getMove2());
                         battle_textfield.setText(trainer.getPartyPokemons().get(myCurrentPokemon).getDisplayName().toUpperCase() + " used " + trainer.getPartyPokemons().get(myCurrentPokemon).getMove2().getDisplayName().toUpperCase() + "!");
-                        turn.setValue(turn.getValue() + 1);
                     });
                 } else {
                     Move2Button.setText("");
@@ -454,9 +454,9 @@ public class FxmlBattleSceneController implements Initializable {
                     Move3Button.setText(trainer.getPartyPokemons().get(myCurrentPokemon).getMove3().getDisplayName());
                     Move3Button.setDisable(false);
                     Move3Button.setOnAction(onEvent -> {
+                        turn.setValue(turn.getValue() + 1);
                         opponent.getPartyPokemons().get(opponentsCurrentPokemon).hurt(trainer.getPartyPokemons().get(myCurrentPokemon), trainer.getPartyPokemons().get(myCurrentPokemon).getMove3());
                         battle_textfield.setText(trainer.getPartyPokemons().get(myCurrentPokemon).getDisplayName().toUpperCase() + " used " + trainer.getPartyPokemons().get(myCurrentPokemon).getMove3().getDisplayName().toUpperCase() + "!");
-                        turn.setValue(turn.getValue() + 1);
                     });
                 } else {
                     Move3Button.setText("");
@@ -467,9 +467,9 @@ public class FxmlBattleSceneController implements Initializable {
                     Move4Button.setText(trainer.getPartyPokemons().get(myCurrentPokemon).getMove4().getDisplayName());
                     Move4Button.setDisable(false);
                     Move4Button.setOnAction(onEvent -> {
+                        turn.setValue(turn.getValue() + 1);
                         opponent.getPartyPokemons().get(opponentsCurrentPokemon).hurt(trainer.getPartyPokemons().get(myCurrentPokemon), trainer.getPartyPokemons().get(myCurrentPokemon).getMove4());
                         battle_textfield.setText(trainer.getPartyPokemons().get(myCurrentPokemon).getDisplayName().toUpperCase() + " used " + trainer.getPartyPokemons().get(myCurrentPokemon).getMove4().getDisplayName().toUpperCase() + "!");
-                        turn.setValue(turn.getValue() + 1);
                     });
                 } else {
                     Move4Button.setText("");
