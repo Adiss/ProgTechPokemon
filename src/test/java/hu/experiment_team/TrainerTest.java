@@ -30,7 +30,7 @@ public class TrainerTest {
         t.setDisplayName("Adiss");
         t.setPassword("824e456e4cfd675348965387a08924fffaf2ae06");
         t.setEmail("adiss.b17@gmail.com");
-        t.setRegister_date(Timestamp.valueOf("2016-05-17 18:39:00"));
+        t.setRegister_date(Timestamp.valueOf("2016-05-17 18:39:01"));
         t.setOwnedPokemons(pokes);
         t.setMatchLoose(0);
         t.setMatchWin(0);
@@ -43,7 +43,7 @@ public class TrainerTest {
         assertEquals(t.getDisplayName(), "Adiss");
         assertEquals(t.getPassword(), "824e456e4cfd675348965387a08924fffaf2ae06");
         assertEquals(t.getEmail(), "adiss.b17@gmail.com");
-        assertEquals(t.getRegister_date(), Timestamp.valueOf("2016.05.17"));
+        assertEquals(t.getRegister_date(), Timestamp.valueOf("2016-05-17 18:39:01"));
         assertTrue(t.getOwnedPokemons().size() == 2);
         assertEquals(t.getMatchLoose(), 0);
         assertEquals(t.getMatchWin(), 0);
