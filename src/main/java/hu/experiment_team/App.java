@@ -1,7 +1,7 @@
 package hu.experiment_team;
 
-import hu.experiment_team.dao.PokemonDAO;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -36,6 +36,12 @@ public class App extends Application
 
         Scene loginScene = new Scene(root, 400, 300);
         primaryStage.setScene(loginScene);
+
+        primaryStage.setOnCloseRequest(t -> {
+            Platform.exit();
+            System.exit(0);
+        });
+
         primaryStage.show();
 
     }

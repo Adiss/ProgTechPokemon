@@ -15,12 +15,16 @@ public enum PokemonUtils {
 
         ImageView pokemonImage;
 
+        /*
         if(id < 10)
             pokemonImage = new ImageView("/images/battlers/00" + String.valueOf(id) + ".gif");
         else if (id < 100)
             pokemonImage = new ImageView("/images/battlers/0" + String.valueOf(id) + ".gif");
         else
             pokemonImage = new ImageView("/images/battlers/" + String.valueOf(id) + ".gif");
+        */
+
+        pokemonImage = new ImageView("/images/battlers/pokiAdiss.gif");
 
         pokemonImage.setPreserveRatio(true);
         pokemonImage.setFitHeight(80);
@@ -32,12 +36,17 @@ public enum PokemonUtils {
 
         Image pokemonImage;
 
+        /*
         if(id < 10)
             pokemonImage = new Image("/images/battlers/00" + String.valueOf(id) + ".gif");
         else if (id < 100)
             pokemonImage = new Image("/images/battlers/0" + String.valueOf(id) + ".gif");
         else
             pokemonImage = new Image("/images/battlers/" + String.valueOf(id) + ".gif");
+        */
+
+        pokemonImage = new Image("/images/battlers/pokiAdiss.gif");
+
 
         return pokemonImage;
     }
@@ -46,12 +55,15 @@ public enum PokemonUtils {
 
         Image pokemonImage;
 
+        /*
         if(id < 10)
             pokemonImage = new Image("/images/battlers/00" + String.valueOf(id) + "b.gif");
         else if (id < 100)
             pokemonImage = new Image("/images/battlers/0" + String.valueOf(id) + "b.gif");
         else
             pokemonImage = new Image("/images/battlers/" + String.valueOf(id) + "b.gif");
+        */
+        pokemonImage = new Image("/images/battlers/pokiAdiss_b.gif");
 
         return pokemonImage;
     }

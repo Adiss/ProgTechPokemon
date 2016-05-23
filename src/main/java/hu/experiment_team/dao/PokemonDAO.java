@@ -167,6 +167,7 @@ public enum PokemonDAO implements MoveDaoInterface, PokemonDaoInterface, Trainer
         p.setType1(bp.getType1());
         p.setType2(bp.getType2());
         p.setHp(bp.getHp());
+        p.gethpProperty().setValue(bp.getHp());
         p.setAttack(bp.getAttack());
         p.setDefense(bp.getDefense());
         p.setSpeed(bp.getSpeed());
@@ -204,6 +205,7 @@ public enum PokemonDAO implements MoveDaoInterface, PokemonDaoInterface, Trainer
         p.setType1(bp.getType1());
         p.setType2(bp.getType2());
         p.setHp(bp.getHp());
+        p.gethpProperty().setValue(bp.getHp());
         p.setAttack(bp.getAttack());
         p.setDefense(bp.getDefense());
         p.setSpeed(bp.getSpeed());

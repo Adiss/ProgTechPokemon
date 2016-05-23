@@ -12,8 +12,18 @@
 
   <name>PokemonProgram</name>
   <url>http://experiment-team.hu/</url>
+  <organization>
+    <name>Experiment-team</name>
+  </organization>
   <inceptionYear>2016</inceptionYear>
   <description>Pokemon program az orara</description>
+
+  <licenses>
+    <license>
+      <name>Apache License 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+    </license>
+  </licenses>
 
   <developers>
     <developer>
@@ -28,19 +38,12 @@
     </developer>
   </developers>
 
-  <licenses>
-    <license>
-      <name>GNU GPL</name>
-      <url>http://www.gnu.org/copyleft/gpl.html</url>
-      <comments>GPLv3</comments>
-    </license>
-  </licenses>
-
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <maven.compiler.target>1.8</maven.compiler.target>
     <maven.compiler.source>1.8</maven.compiler.source>
+    <license.licenseName>apache_v2</license.licenseName>
   </properties>
 
   <dependencies>
@@ -108,11 +111,6 @@
       <groupId>org.powermock</groupId>
       <artifactId>powermock-module-junit4</artifactId>
       <version>1.5.2</version>
-    </dependency>
-    <dependency>
-      <groupId>commons-codec</groupId>
-      <artifactId>commons-codec</artifactId>
-      <version>1.10</version>
     </dependency>
   </dependencies>
 
@@ -192,7 +190,7 @@
             <configuration>
               <rules>
                 <requireJavaVersion>
-                  <version>1.8.0-31</version>
+                  <version>1.8.0-60</version>
                 </requireJavaVersion>
               </rules>
             </configuration>

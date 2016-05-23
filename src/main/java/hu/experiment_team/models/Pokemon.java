@@ -64,8 +64,6 @@ public class Pokemon implements Cloneable {
      * */
     @Column(name = "hp")
     private int hp;
-    @Transient
-    private IntegerProperty hpProperty = new SimpleIntegerProperty(0);
     @Column(name = "attack")
     private int attack;
     @Column(name = "defense")
@@ -81,6 +79,8 @@ public class Pokemon implements Cloneable {
     private int accuracy = 100;
     @Transient
     private int criticalChance = 0;
+    @Transient
+    private int originalHp;
 
     /**
      * Up to 4 additional abilities this species can have.
@@ -160,6 +160,9 @@ public class Pokemon implements Cloneable {
     @Transient
     private int evasion = 0;
 
+    @Transient
+    private IntegerProperty hpProperty = new SimpleIntegerProperty(hp);
+
     /**
      * Paraméter nélküli konstruktor a JPA-nak
      */
@@ -197,6 +200,12 @@ public class Pokemon implements Cloneable {
         this.currentXp = 0;
         this.level = level;
         this.lastMove = null;
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        Pokemon cloned = (Pokemon)super.clone();
+        return cloned;
     }
 
     public void hurt(Pokemon attacker, Move move){
@@ -375,6 +384,7 @@ public class Pokemon implements Cloneable {
     public void setClonedOne() {
         try {
             clonedOne = (Pokemon) this.clone();
+            originalHp = hp;
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }
@@ -547,6 +557,14 @@ public class Pokemon implements Cloneable {
 
     public void setHpProperty(int hpProperty) {
         this.hpProperty.set(hpProperty);
+    }
+
+    public int getOriginalHp() {
+        return originalHp;
+    }
+
+    public void setOriginalHp(int originalHp) {
+        this.originalHp = originalHp;
     }
 
     @Override

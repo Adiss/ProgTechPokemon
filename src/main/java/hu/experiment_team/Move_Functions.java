@@ -1,6 +1,5 @@
 package hu.experiment_team;
 
-import hu.experiment_team.models.Move;
 import hu.experiment_team.models.Pokemon;
 
 import java.util.Random;
