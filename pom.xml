@@ -165,7 +165,7 @@
             <configuration>
               <archive>
                 <manifest>
-                  <mainClass>experiment_team.App</mainClass>
+                  <mainClass>hu.experiment_team.App</mainClass>
                 </manifest>
               </archive>
               <descriptorRefs>
