@@ -6,11 +6,9 @@ import hu.experiment_team.dao.PokemonDAO;
 import hu.experiment_team.models.Move;
 import hu.experiment_team.models.Pokemon;
 import hu.experiment_team.models.Trainer;
-import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
-import javafx.application.Platform;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
@@ -83,6 +81,7 @@ public class FxmlBattleSceneController implements Initializable {
     private Random r;
     private Image opponentTrainerImage;
     private IntegerProperty turn = new SimpleIntegerProperty();
+    private boolean won;
 
     private ChangeListener OpponentPokemonHpchangeListener = (observableValue, oldValue, newValue) -> {
         double oldV = opponent.getPartyPokemons().get(opponentsCurrentPokemon).getClonedOne().getHp();
@@ -107,22 +106,26 @@ public class FxmlBattleSceneController implements Initializable {
     };
 
     private ChangeListener turnListener = (observableValue, oldValue, newValue) -> {
-        // TODO -> A pokemon kiesése utáni pokémon azonnal sebez! Ez így nem fain.
-        System.out.println(newValue);
-        if((int)newValue % 2 == 0){
+        if((int)newValue % 2 == 0 && !won){
             doOpponentPokemonsAttack();
+            System.out.println("Origi: " + trainer.getPartyPokemons().get(myCurrentPokemon).getDisplayName());
+            System.out.println("Origi: " + trainer.getPartyPokemons().get(myCurrentPokemon).getOriginalHp());
+            System.out.println("Clone: " + trainer.getPartyPokemons().get(myCurrentPokemon).getClonedOne().gethpProperty().getValue());
         }
     };
 
     FxmlBattleSceneController(Trainer t) {
         this.trainer = t;
-        trainer.getPartyPokemons().get(0).gethpProperty().addListener(myPokemonHpchangeListener);
         myCurrentPokemon = 0;
-        this.opponent = PokemonDAO.INSTANCE.createRandomTrainer(t.getPartyPokemons().get(0).getLevel());
-        opponent.getPartyPokemons().get(0).gethpProperty().addListener(OpponentPokemonHpchangeListener);
-        opponentTrainerImage = PokemonUtils.INSTANCE.getRandomTrainerImage();
         opponentsCurrentPokemon = 0;
+        trainer.getPartyPokemons().get(myCurrentPokemon).setHpProperty(trainer.getPartyPokemons().get(myCurrentPokemon).getOriginalHp());
+        trainer.getPartyPokemons().get(myCurrentPokemon).setHp(trainer.getPartyPokemons().get(myCurrentPokemon).getOriginalHp());
+        trainer.getPartyPokemons().get(myCurrentPokemon).gethpProperty().addListener(myPokemonHpchangeListener);
+        this.opponent = PokemonDAO.INSTANCE.createRandomTrainer(t.getPartyPokemons().get(opponentsCurrentPokemon).getLevel());
+        opponent.getPartyPokemons().get(opponentsCurrentPokemon).gethpProperty().addListener(OpponentPokemonHpchangeListener);
+        opponentTrainerImage = PokemonUtils.INSTANCE.getRandomTrainerImage();
         this.r = new Random();
+        won = false;
 
         turn.setValue(1);
         turn.addListener(turnListener);
@@ -146,7 +149,7 @@ public class FxmlBattleSceneController implements Initializable {
         );
 
         // Set the position of my pokemon and its image.
-        myPokemonImage.setImage(PokemonUtils.INSTANCE.getPokemonBackImage(trainer.getPartyPokemons().get(0).getId()));
+        myPokemonImage.setImage(PokemonUtils.INSTANCE.getPokemonBackImage(trainer.getPartyPokemons().get(myCurrentPokemon).getId()));
         AnchorPane.setLeftAnchor(myPokemonImage, 0.0);
         AnchorPane.setBottomAnchor(myPokemonImage, 0.0);
 
@@ -165,18 +168,18 @@ public class FxmlBattleSceneController implements Initializable {
         AnchorPane.setRightAnchor(MyPokemonStatusPanel, 40.0);
 
         // Sets my pokemons display name and hp text.
-        MyPokemonName.setText(trainer.getPartyPokemons().get(0).getDisplayName());
+        MyPokemonName.setText(trainer.getPartyPokemons().get(myCurrentPokemon).getDisplayName());
         AnchorPane.setTopAnchor(MyPokemonName, 15.0);
         AnchorPane.setLeftAnchor(MyPokemonName, 10.0);
-        MyPokemonHpText.setText(String.valueOf(trainer.getPartyPokemons().get(0).getHp()));
+        MyPokemonHpText.setText(String.valueOf(trainer.getPartyPokemons().get(myCurrentPokemon).getHp()));
         AnchorPane.setTopAnchor(MyPokemonHpText, 50.0);
         AnchorPane.setLeftAnchor(MyPokemonHpText, 60.0);
 
         // Sets the opponent pokemons display name and hp text.
-        OpponentPokemonName.setText(opponent.getPartyPokemons().get(0).getDisplayName());
+        OpponentPokemonName.setText(opponent.getPartyPokemons().get(opponentsCurrentPokemon).getDisplayName());
         AnchorPane.setTopAnchor(OpponentPokemonName, 15.0);
         AnchorPane.setLeftAnchor(OpponentPokemonName, 10.0);
-        OpponentPokemonHpText.setText(String.valueOf(opponent.getPartyPokemons().get(0).getHp()));
+        OpponentPokemonHpText.setText(String.valueOf(opponent.getPartyPokemons().get(opponentsCurrentPokemon).getHp()));
         AnchorPane.setTopAnchor(OpponentPokemonHpText, 50.0);
         AnchorPane.setLeftAnchor(OpponentPokemonHpText, 60.0);
 
@@ -239,7 +242,7 @@ public class FxmlBattleSceneController implements Initializable {
         }
 
 
-        battle_textfield.setText(opponent.getDisplayName().toUpperCase() + " has challenged you to a battle with " + opponent.getPartyPokemons().get(0).getDisplayName().toUpperCase() + "! Use your " + trainer.getPartyPokemons().get(0).getDisplayName().toUpperCase() + "'s abilities to win!");
+        battle_textfield.setText(opponent.getDisplayName().toUpperCase() + " has challenged you to a battle with " + opponent.getPartyPokemons().get(opponentsCurrentPokemon).getDisplayName().toUpperCase() + "! Use your " + trainer.getPartyPokemons().get(myCurrentPokemon).getDisplayName().toUpperCase() + "'s abilities to win!");
 
     }
 
@@ -285,12 +288,28 @@ public class FxmlBattleSceneController implements Initializable {
         // If the opponents party pokemons fainted you won the match and got the message about it
         if (opponentsCurrentPokemon == 5) {
 
+            won = true;
+
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Congratulations!");
             alert.setHeaderText("You have won the match!");
             alert.setContentText("");
             alert.setOnCloseRequest(event -> {
                 try {
+                    trainer.getPartyPokemons().get(0).setHpProperty(trainer.getPartyPokemons().get(0).getOriginalHp());
+                    trainer.getPartyPokemons().get(1).setHpProperty(trainer.getPartyPokemons().get(1).getOriginalHp());
+                    trainer.getPartyPokemons().get(2).setHpProperty(trainer.getPartyPokemons().get(2).getOriginalHp());
+                    trainer.getPartyPokemons().get(3).setHpProperty(trainer.getPartyPokemons().get(3).getOriginalHp());
+                    trainer.getPartyPokemons().get(4).setHpProperty(trainer.getPartyPokemons().get(4).getOriginalHp());
+                    trainer.getPartyPokemons().get(5).setHpProperty(trainer.getPartyPokemons().get(5).getOriginalHp());
+
+                    trainer.getPartyPokemons().get(0).setHp(trainer.getPartyPokemons().get(0).getOriginalHp());
+                    trainer.getPartyPokemons().get(1).setHp(trainer.getPartyPokemons().get(1).getOriginalHp());
+                    trainer.getPartyPokemons().get(2).setHp(trainer.getPartyPokemons().get(2).getOriginalHp());
+                    trainer.getPartyPokemons().get(3).setHp(trainer.getPartyPokemons().get(3).getOriginalHp());
+                    trainer.getPartyPokemons().get(4).setHp(trainer.getPartyPokemons().get(4).getOriginalHp());
+                    trainer.getPartyPokemons().get(5).setHp(trainer.getPartyPokemons().get(5).getOriginalHp());
+
                     trainer.setPartyPokemons(new ArrayList<Pokemon>());
                     Stage stage = (Stage) top_battle_scene_holder.getScene().getWindow();
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/account_panel.fxml"));
@@ -342,7 +361,7 @@ public class FxmlBattleSceneController implements Initializable {
             sleeper.setOnSucceeded(event -> {
                 OpponentPokemonHpProgressBar.progressProperty().setValue(1);
                 OpponentPokemonName.setText(opponent.getPartyPokemons().get(opponentsCurrentPokemon).getDisplayName());
-                OpponentPokemonHpText.setText(String.valueOf(opponent.getPartyPokemons().get(opponentsCurrentPokemon).getHp()));
+                OpponentPokemonHpText.setText(String.valueOf(opponent.getPartyPokemons().get(opponentsCurrentPokemon).gethpProperty().getValue()));
                 battle_textfield.setText(opponent.getDisplayName().toUpperCase() + " sent out " + opponent.getPartyPokemons().get(opponentsCurrentPokemon).getDisplayName().toUpperCase() + "!");
 
                 Move1Button.setDisable(false);
@@ -367,7 +386,7 @@ public class FxmlBattleSceneController implements Initializable {
             alert.setContentText("");
             alert.setOnCloseRequest(event -> {
                 try {
-                    trainer.setPartyPokemons(new ArrayList<Pokemon>());
+                    trainer.getPartyPokemons().clear();
                     Stage stage = (Stage)top_battle_scene_holder.getScene().getWindow();
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/account_panel.fxml"));
                     FxmlAccountPanelController controller = new FxmlAccountPanelController(trainer);
@@ -384,6 +403,7 @@ public class FxmlBattleSceneController implements Initializable {
 
         } else {
             trainer.getPartyPokemons().get(myCurrentPokemon).gethpProperty().removeListener(myPokemonHpchangeListener);
+            trainer.getPartyPokemons().get(myCurrentPokemon).gethpProperty().setValue(trainer.getPartyPokemons().get(myCurrentPokemon).getOriginalHp());
             if(partyNumber > 0) {
                 myCurrentPokemon++;
             }
